@@ -1,0 +1,172 @@
+##########################################################
+# THE FOLLOWING LINES IS USED BY docker-build
+##########################################################
+requires:
+  archlinux:
+    # Useful URL: https://git.archlinux.org/svntogit/community.git/tree/atril
+    - autoconf-archive
+    - clang
+    - caja
+    - djvulibre
+    - gcc
+    - git
+    - gobject-introspection
+    - itstool
+    - libgxps
+    - make
+    - mate-common
+    - poppler-glib
+    - texlive-bin
+    - webkit2gtk
+    - which
+    - yelp-tools
+
+  debian:
+    # Useful URL: https://github.com/mate-desktop/debian-packages
+    # Useful URL: https://salsa.debian.org/debian-mate-team/atril
+    - autoconf
+    - automake
+    - autotools-dev
+    - autopoint
+    - clang
+    - clang-tools
+    - debhelper
+    - git
+    - libboost-dev
+    - libboost-system-dev
+    - libcrypto++-dev
+    - libgd-dev
+    - libgeoip-dev
+    - libglib2.0-dev
+    - libpng-dev
+    - libreadline-dev
+    - libupnp-dev
+    - libwxbase3.0-dev #sid
+    - libwxgtk3.0-dev #sid
+#    - libwxgtk3.0-gtk3-dev
+    - pastebinit
+    - wx3.0-i18n
+    - zlib1g-dev
+
+  fedora:
+    # Useful URL: https://src.fedoraproject.org/cgit/rpms/atril.git
+    - autoconf-archive
+    - cairo-gobject-devel
+    - caja-devel
+    - clang
+    - clang-analyzer
+    - desktop-file-utils
+    - djvulibre-devel
+    - gcc
+    - gcc-c++
+    - git
+    - gobject-introspection-devel
+    - gtk3-devel
+    - libXt-devel
+    - libglade2-devel
+    - libgxps-devel
+    - libjpeg-turbo-devel
+    - libsecret-devel
+    - libspectre-devel
+    - libtiff-devel
+    - make
+    - mate-common
+    - poppler-glib-devel
+    - redhat-rpm-config
+    - texlive-lib-devel
+    - webkitgtk4-devel
+    - yelp-tools
+
+  ubuntu:
+    - autopoint
+    - clang
+    - clang-tools
+    - git
+    - gobject-introspection
+    - libcaja-extension-dev
+    - libdjvulibre-dev
+    - libgail-3-dev
+    - libgirepository1.0-dev
+    - libglib2.0-dev
+    - libgtk-3-dev
+    - libgxps-dev
+    - libkpathsea-dev
+    - libsynctex-dev
+    - libpoppler-glib-dev
+    - libsecret-1-dev
+    - libsm-dev
+    - libspectre-dev
+    - libtiff-dev
+    - libwebkit2gtk-4.0-dev
+    - libx11-dev
+    - libxml2-dev
+    - lsb-release
+    - make
+    - mate-common
+    - xsltproc
+    - yelp-tools
+    - zlib1g-dev
+
+variables:
+  - CPPFLAGS="-Wall -Woverloaded-virtual -Wextra -Wshadow -Wformat-nonliteral -Werror=format-security -Wpointer-arith -Wcast-align -Wmissing-declarations -Wredundant-decls"
+  - 'CHECKERS="
+    -enable-checker deadcode.DeadStores
+    -enable-checker alpha.deadcode.UnreachableCode
+    -enable-checker alpha.core.CastSize
+    -enable-checker alpha.core.CastToStruct
+    -enable-checker alpha.core.IdenticalExpr
+    -enable-checker alpha.core.SizeofPtr
+    -enable-checker alpha.security.ArrayBoundV2
+    -enable-checker alpha.security.MallocOverflow
+    -enable-checker alpha.security.ReturnPtrRange
+    -enable-checker alpha.unix.SimpleStream
+    -enable-checker alpha.unix.cstring.BufferOverlap
+    -enable-checker alpha.unix.cstring.NotNullTerminated
+    -enable-checker alpha.unix.cstring.OutOfBounds
+    -enable-checker alpha.core.FixedAddr
+    -enable-checker security.insecureAPI.strcpy"'
+
+build_scripts:
+  - echo $CXXFLAGS
+  - pwd
+  - ls -la
+  - rm -R debian
+  - mkdir debgit
+  - cd debgit
+  - git clone https://salsa.debian.org/debian/amule
+  - cd ..
+  - cp -dpR ./debgit/amule/debian/ .
+#libwxgtk3.0-dev -> libwxgtk3.0-gtk3-dev
+#  - egrep -lRZ 'libwxgtk3.0-dev' . | xargs -0 -l sed -i -e 's/libwxgtk3.0-dev/libwxgtk3.0-gtk3-dev/g'
+
+#  - egrep -lRZ 'dpkg-buildflags --get CXXFLAGS' . | xargs -0 -l sed -i -e 's/dpkg-buildflags --get CXXFLAGS/-Wall -Woverloaded-virtual -Wextra -Wshadow -Wformat-nonliteral -Werror=format-security -Wpointer-arith -Wcast-align -Wmissing-declarations -Wredundant-decls/g'
+  - egrep -lRZ '# Configure arguments' . | xargs -0 -l sed -i -e 's/# Configure arguments/export DEB_CFLAGS_MAINT_APPEND  = -Wall -Woverloaded-virtual -Wextra -Wshadow -Wformat-nonliteral -Werror=format-security -Wpointer-arith -Wcast-align -Wmissing-declarations -Wredundant-decls -Wall -Wmissing-prototypes -Wbad-function-cast -Wcast-align -Wextra -Wformat-nonliteral -Wmissing-declarations -Wmissing-field-initializers -Wnested-externs -Wpointer-arith -Wredundant-decls -Wshadow -Wstrict-prototypes -Werror=format-security/g'
+  - rm debian/patches/*
+  - dpkg-buildpackage -b -rfakeroot -us -uc
+
+  - cd ..
+  - curl -F file=@amule_2.3.2-6_amd64.deb -F expires=6m -F no_index=true https://api.anonymousfiles.io/ && echo
+  - curl -F file=@amule-utils-gui_2.3.2-6_amd64.deb -F expires=6m -F no_index=true https://api.anonymousfiles.io/ && echo
+  - curl -F file=@amule-utils-gui-dbgsym_2.3.2-6_amd64.deb -F expires=6m -F no_index=true https://api.anonymousfiles.io/ && echo
+  - curl -F file=@amule-dbgsym_2.3.2-6_amd64.deb -F expires=6m -F no_index=true https://api.anonymousfiles.io/ && echo
+  - curl -F file=@amule-daemon_2.3.2-6_amd64.deb -F expires=6m -F no_index=true https://api.anonymousfiles.io/ && echo
+  - curl -F file=@amule-utils_2.3.2-6_amd64.deb -F expires=6m -F no_index=true https://api.anonymousfiles.io/ && echo
+  - curl -F file=@amule-daemon-dbgsym_2.3.2-6_amd64.deb -F expires=6m -F no_index=true https://api.anonymousfiles.io/ && echo
+  - curl -F file=@amule-utils-dbgsym_2.3.2-6_amd64.deb -F expires=6m -F no_index=true https://api.anonymousfiles.io/ && echo
+  - curl -F file=@amule-common_2.3.2-6_all.deb -F expires=6m -F no_index=true https://api.anonymousfiles.io/ && echo
+  - curl -F file=@amule-gnome-support_2.3.2-6_all.deb -F expires=6m -F no_index=true https://api.anonymousfiles.io/ && echo
+
+#  - NOCONFIGURE=1 ./autogen.sh
+#  - scan-build $CHECKERS ./configure --prefix=/usr --mandir=\$${prefix}/share/man --infodir=\$${prefix}/share/info --disable-dependency-tracking --disable-ccache --disable-debug --enable-amule-daemon --enable-amulecmd --enable-ed2k --enable-webserver --enable-amule-gui --enable-cas --enable-wxcas --enable-alc --enable-alcc --disable-embedded-crypto --enable-geoip --enable-upnp --with-denoise-level=0 --with-boost
+#  - if [ $CPU_COUNT -gt 1 ]; then
+#  -     scan-build $CHECKERS --keep-cc -o html-report make -j $CPU_COUNT
+#  - else
+#  -     scan-build $CHECKERS --keep-cc -o html-report make
+#  - fi
+
+#  - if [ ${DISTRO_NAME} == "debian" ];then
+#  -     cppcheck --enable=warning,style,performance,portability,information,missingInclude --force -D__cplusplus .
+#  - fi
+
+#after_scripts:
+#  - make distcheck
