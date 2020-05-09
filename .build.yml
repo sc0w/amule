@@ -1,0 +1,68 @@
+##########################################################
+# THE FOLLOWING LINES IS USED BY docker-build
+##########################################################
+requires:
+  debian:
+    # Useful URL: https://github.com/mate-desktop/debian-packages
+    # Useful URL: https://salsa.debian.org/debian-mate-team/atril
+    - autoconf
+    - automake
+    - autotools-dev
+    - autopoint
+#    - binutils-dev #make check/distcheck
+    - clang
+    - clang-tools
+    - cppcheck
+    - debhelper
+    - git
+#    - kdelibs-bin #make check/distcheck
+    - libboost-dev
+    - libboost-system-dev
+    - libcrypto++-dev
+    - libgd-dev
+    - libgeoip-dev
+    - libglib2.0-dev
+    - libpng-dev
+#    - libqt4-dev #make check/distcheck
+#    - libqt4-dev-bin #make check/distcheck
+    - libreadline-dev
+    - libupnp-dev
+    - libwxbase3.0-dev #sid
+#   - libwxgtk3.0-dev #buster
+    - libwxgtk3.0-gtk3-dev
+    - pastebinit
+    - wx3.0-i18n
+    - zlib1g-dev
+
+variables:
+#  - CPPFLAGS="-Wall -Woverloaded-virtual -Wextra -Wshadow -Wformat-nonliteral -Werror=format-security -Wpointer-arith -Wcast-align -Wmissing-declarations -Wredundant-decls"
+  - CXXFLAGS="-Wall -Woverloaded-virtual -Wextra -Wshadow -Wformat-nonliteral -Werror=format-security -Wpointer-arith -Wcast-align -Wmissing-declarations -Wredundant-decls -Wall -Wcast-align -Wextra -Wformat-nonliteral -Wmissing-declarations -Wmissing-field-initializers -Wpointer-arith -Wredundant-decls -Wshadow -Werror=format-security -Wunused-macros"
+  - CFLAGS="-Wall -Wextra -Wshadow -Wformat-nonliteral -Werror=format-security -Wpointer-arith -Wcast-align -Wmissing-declarations -Wredundant-decls -Wall -Wmissing-prototypes -Wbad-function-cast -Wcast-align -Wextra -Wformat-nonliteral -Wmissing-declarations -Wmissing-field-initializers -Wnested-externs -Wpointer-arith -Wredundant-decls -Wshadow -Wstrict-prototypes -Werror=format-security -Wunused-macros"
+
+before_scripts:
+  - export TITLECPPCHECK="${REPO_NAME} (cppcheck `dpkg -s cppcheck|grep -i version|cut -d " " -f 2`)"
+  - cppcheck --xml --output-file=cppcheck.xml --enable=warning,style,performance,portability,information,missingInclude .
+  - cppcheck-htmlreport --title="$TITLECPPCHECK" --file=cppcheck.xml --report-dir=cppcheck-htmlreport
+
+build_scripts:
+  - export TITLESCANBUILD="${REPO_NAME} (clang-tools `dpkg -s clang-tools|grep -i version|cut -d " " -f 2`) - scan-build results"
+  - mkdir html-report
+  - cppcheck --enable=warning,style,performance,portability,information,missingInclude . 2>&1 | tee -a ./html-report/output_${TRAVIS_COMMIT}
+
+#  - mkdir ../clang
+#  - cp -dpR . ../clang
+#  - cd ../clang
+  - NOCONFIGURE=1 ./autogen.sh
+  - scan-build $CHECKERS ./configure --prefix=/usr --mandir=\$${prefix}/share/man --infodir=\$${prefix}/share/info --disable-dependency-tracking --disable-ccache --disable-debug --enable-amule-daemon --enable-amulecmd --enable-ed2k --enable-webserver --enable-amule-gui --enable-cas --enable-wxcas --enable-alc --enable-alcc --disable-embedded-crypto --enable-geoip --enable-upnp --with-denoise-level=0 --with-boost
+  - scan-build $CHECKERS --html-title="$TITLESCANBUILD" --keep-cc -o html-report make -j $CPU_COUNT 2>&1 | tee -a ./html-report/output_${TRAVIS_COMMIT}
+  - echo Warnings detected in the logs `cat ./html-report/output_${TRAVIS_COMMIT} | grep -i warning | wc -l` 2>&1 | tee -a ./html-report/output_${TRAVIS_COMMIT}
+#  - tar -zcf amule_clang_htmlreport.tar.gz amule_clang_htmlreport
+#  - curl -F file=@amule_clang_htmlreport.tar.gz -F expires=6m -F no_index=true https://api.anonymousfiles.io/ && echo
+#  - cd ../rootdir
+
+after_scripts:
+  - make check
+#  - make distcheck
+  - make clean
+  - if [ -f "gen-index" ]; then ./gen-index -l 20; fi
+#  - make distclean
