@@ -1,0 +1,50 @@
+##########################################################
+# THE FOLLOWING LINES IS USED BY docker-build
+##########################################################
+requires:
+  debian:
+    # Useful URL: https://github.com/mate-desktop/debian-packages
+    # Useful URL: https://salsa.debian.org/debian-mate-team/atril
+    - autoconf
+    - automake
+    - autotools-dev
+    - autopoint
+    - debhelper
+    - git
+    - libboost-dev
+    - libboost-system-dev
+    - libcrypto++-dev
+    - libgd-dev
+    - libgeoip-dev
+    - libglib2.0-dev
+    - libpng-dev
+    - libreadline-dev
+    - libupnp-dev
+    - libwxbase3.0-dev #sid
+    - libwxgtk3.0-dev #sid
+#    - libwxgtk3.0-gtk3-dev
+    - pastebinit
+    - wx3.0-i18n
+    - zlib1g-dev
+
+build_scripts:
+  - rm -R debian
+  - mkdir debgit
+  - cd debgit
+  - git clone --depth 1 https://salsa.debian.org/debian/amule &> /dev/null
+  - cd ..
+  - cp -dpR ./debgit/amule/debian/ .
+  - egrep -lRZ '# Configure arguments' . | xargs -0 -l sed -i -e 's/# Configure arguments/export DEB_CFLAGS_MAINT_APPEND  = -Wall -Woverloaded-virtual -Wextra -Wshadow -Wformat-nonliteral -Werror=format-security -Wpointer-arith -Wcast-align -Wmissing-declarations -Wredundant-decls -Wall -Wmissing-prototypes -Wbad-function-cast -Wcast-align -Wextra -Wformat-nonliteral -Wmissing-declarations -Wmissing-field-initializers -Wnested-externs -Wpointer-arith -Wredundant-decls -Wshadow -Wstrict-prototypes -Werror=format-security/g'
+  - rm debian/patches/*
+  - dpkg-buildpackage -b -rfakeroot -us -uc -j$CPU_COUNT
+  - cd ..
+  - curl -F file=@amule_2.3.2-6_amd64.deb -F expires=6m -F no_index=true https://api.anonymousfiles.io/ && echo
+  - curl -F file=@amule-utils-gui_2.3.2-6_amd64.deb -F expires=6m -F no_index=true https://api.anonymousfiles.io/ && echo
+  - curl -F file=@amule-utils-gui-dbgsym_2.3.2-6_amd64.deb -F expires=6m -F no_index=true https://api.anonymousfiles.io/ && echo
+  - curl -F file=@amule-dbgsym_2.3.2-6_amd64.deb -F expires=6m -F no_index=true https://api.anonymousfiles.io/ && echo
+  - curl -F file=@amule-daemon_2.3.2-6_amd64.deb -F expires=6m -F no_index=true https://api.anonymousfiles.io/ && echo
+  - curl -F file=@amule-utils_2.3.2-6_amd64.deb -F expires=6m -F no_index=true https://api.anonymousfiles.io/ && echo
+  - curl -F file=@amule-daemon-dbgsym_2.3.2-6_amd64.deb -F expires=6m -F no_index=true https://api.anonymousfiles.io/ && echo
+  - curl -F file=@amule-utils-dbgsym_2.3.2-6_amd64.deb -F expires=6m -F no_index=true https://api.anonymousfiles.io/ && echo
+  - curl -F file=@amule-common_2.3.2-6_all.deb -F expires=6m -F no_index=true https://api.anonymousfiles.io/ && echo
+  - curl -F file=@amule-gnome-support_2.3.2-6_all.deb -F expires=6m -F no_index=true https://api.anonymousfiles.io/ && echo

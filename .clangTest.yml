@@ -1,0 +1,71 @@
+##########################################################
+# THE FOLLOWING LINES IS USED BY docker-build
+##########################################################
+requires:
+  debian:
+    # Useful URL: https://github.com/mate-desktop/debian-packages
+    # Useful URL: https://salsa.debian.org/debian-mate-team/atril
+    - autoconf
+    - automake
+    - autotools-dev
+    - autopoint
+#    - binutils-dev #make check/distcheck
+    - clang
+    - clang-tools
+    - debhelper
+    - git
+#    - kdelibs-bin #make check/distcheck
+    - libboost-dev
+    - libboost-system-dev
+    - libcrypto++-dev
+    - libgd-dev
+    - libgeoip-dev
+    - libglib2.0-dev
+    - libpng-dev
+#    - libqt4-dev #make check/distcheck
+#    - libqt4-dev-bin #make check/distcheck
+    - libreadline-dev
+    - libupnp-dev
+    - libwxbase3.0-dev #sid
+    - libwxgtk3.0-dev #sid
+#    - libwxgtk3.0-gtk3-dev
+    - pastebinit
+    - wx3.0-i18n
+    - zlib1g-dev
+
+variables:
+#  - CPPFLAGS="-Wall -Woverloaded-virtual -Wextra -Wshadow -Wformat-nonliteral -Werror=format-security -Wpointer-arith -Wcast-align -Wmissing-declarations -Wredundant-decls"
+  - CXXFLAGS="-Wall -Woverloaded-virtual -Wextra -Wshadow -Wformat-nonliteral -Werror=format-security -Wpointer-arith -Wcast-align -Wmissing-declarations -Wredundant-decls -Wall -Wcast-align -Wextra -Wformat-nonliteral -Wmissing-declarations -Wmissing-field-initializers -Wpointer-arith -Wredundant-decls -Wshadow -Werror=format-security"
+  - CFLAGS="-Wall -Wextra -Wshadow -Wformat-nonliteral -Werror=format-security -Wpointer-arith -Wcast-align -Wmissing-declarations -Wredundant-decls -Wall -Wmissing-prototypes -Wbad-function-cast -Wcast-align -Wextra -Wformat-nonliteral -Wmissing-declarations -Wmissing-field-initializers -Wnested-externs -Wpointer-arith -Wredundant-decls -Wshadow -Wstrict-prototypes -Werror=format-security"
+  - 'CHECKERS="
+    -enable-checker deadcode.DeadStores
+    -enable-checker alpha.deadcode.UnreachableCode
+    -enable-checker alpha.core.CastSize
+    -enable-checker alpha.core.CastToStruct
+    -enable-checker alpha.core.IdenticalExpr
+    -enable-checker alpha.core.SizeofPtr
+    -enable-checker alpha.security.ArrayBoundV2
+    -enable-checker alpha.security.MallocOverflow
+    -enable-checker alpha.security.ReturnPtrRange
+    -enable-checker alpha.unix.SimpleStream
+    -enable-checker alpha.unix.cstring.BufferOverlap
+    -enable-checker alpha.unix.cstring.NotNullTerminated
+    -enable-checker alpha.unix.cstring.OutOfBounds
+    -enable-checker alpha.core.FixedAddr"'
+
+build_scripts:
+#  - mkdir ../clang
+#  - cp -dpR . ../clang
+#  - cd ../clang
+  - NOCONFIGURE=1 ./autogen.sh
+  - scan-build $CHECKERS ./configure --prefix=/usr --mandir=\$${prefix}/share/man --infodir=\$${prefix}/share/info --disable-dependency-tracking --disable-ccache --disable-debug --enable-amule-daemon --enable-amulecmd --enable-ed2k --enable-webserver --enable-amule-gui --enable-cas --enable-wxcas --enable-alc --enable-alcc --disable-embedded-crypto --enable-geoip --enable-upnp --with-denoise-level=0 --with-boost
+  - scan-build $CHECKERS --keep-cc -o amule_clang_htmlreport make -j $CPU_COUNT
+  - tar -zcf amule_clang_htmlreport.tar.gz amule_clang_htmlreport
+  - curl -F file=@amule_clang_htmlreport.tar.gz -F expires=6m -F no_index=true https://api.anonymousfiles.io/ && echo
+#  - cd ../rootdir
+
+after_scripts:
+#  - make check
+#  - make distcheck
+  - make clean
+#  - make distclean
