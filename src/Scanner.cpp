@@ -601,8 +601,6 @@ static int yy_init_globals (void );
 /* Accessor methods to globals.
    These are made visible to non-reentrant scanners for convenience. */
 
-int yylex_destroy (void );
-
 int yyget_debug (void );
 
 void yyset_debug (int debug_flag  );
@@ -733,8 +731,6 @@ static int input (void );
  */
 #ifndef YY_DECL
 #define YY_DECL_IS_OURS 1
-
-extern int yylex (void);
 
 #define YY_DECL int yylex (void)
 #endif /* !YY_DECL */
