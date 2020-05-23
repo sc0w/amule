@@ -69,9 +69,9 @@ static byte base16Chars[17] = "0123456789ABCDEF";
 wxString URLEncode(const wxString& sIn)
 {
 	wxString sOut;
-	unsigned char curChar;
 
 	for ( unsigned int i = 0; i < sIn.Length(); ++i ) {
+		unsigned char curChar;
 		curChar = sIn.GetChar( i );
 
 		if ( isalnum( curChar ) ) {
