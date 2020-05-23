@@ -275,7 +275,7 @@ public:
 	{
 		s_t = ED2KFT_ANY;
 	}
-	EED2KFileTypeClass(EED2KFileType t)
+	explicit EED2KFileTypeClass(EED2KFileType t)
 	{
 		s_t = t;
 	}
@@ -397,7 +397,7 @@ class CMutexUnlocker
 {
 public:
     // unlock the mutex in the ctor
-    CMutexUnlocker(wxMutex& mutex)
+    explicit CMutexUnlocker(wxMutex& mutex)
         : m_isOk(false), m_mutex(mutex)
         { m_isOk = ( m_mutex.Unlock() == wxMUTEX_NO_ERROR ); }
 

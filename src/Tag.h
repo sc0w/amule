@@ -87,8 +87,8 @@ public:
 	wxString GetFullInfo() const;
 
 protected:
-	CTag(const wxString& Name);
-	CTag(uint8 uName);
+	explicit CTag(const wxString& Name);
+	explicit CTag(uint8 uName);
 
 	uint8	m_uType;
 	union {
@@ -123,8 +123,8 @@ public:
 		}
 
 protected:
-	CTagIntSized(const wxString& name) : CTag(name) {}
-	CTagIntSized(uint8 name) : CTag(name) {}
+	explicit CTagIntSized(const wxString& name) : CTag(name) {}
+	explicit CTagIntSized(uint8 name) : CTag(name) {}
 
 	void Init(uint64 value, uint8 bitsize) {
 			switch (bitsize) {

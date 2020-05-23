@@ -282,7 +282,7 @@ struct CSafeIOException : public CMuleException
  * is not fatal.
  */
 struct CEOFException : public CSafeIOException {
-	CEOFException(const wxString& desc);
+	explicit CEOFException(const wxString& desc);
 };
 
 
@@ -294,7 +294,7 @@ struct CEOFException : public CSafeIOException {
  */
 struct CIOFailureException : public CSafeIOException {
 	CIOFailureException(const wxString& type, const wxString& desc);
-	CIOFailureException(const wxString& desc);
+	explicit CIOFailureException(const wxString& desc);
 };
 
 

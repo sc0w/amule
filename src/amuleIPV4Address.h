@@ -33,7 +33,7 @@ class amuleIPV4Address
 public:
 	amuleIPV4Address();
 	amuleIPV4Address(const amuleIPV4Address &a);
-	amuleIPV4Address(const class CamuleIPV4Endpoint &ep);
+	explicit amuleIPV4Address(const class CamuleIPV4Endpoint &ep);
 	virtual ~amuleIPV4Address();
 	amuleIPV4Address& operator=(const amuleIPV4Address &a);
 	amuleIPV4Address& operator=(const class CamuleIPV4Endpoint &a);

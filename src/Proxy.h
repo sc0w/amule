@@ -525,7 +525,7 @@ class CSocketServerProxy : public CLibSocketServer
 {
 public:
 	/* Constructor */
-	CSocketServerProxy(
+	explicit CSocketServerProxy(
 		amuleIPV4Address &address,
 		muleSocketFlags flags = MULE_SOCKET_NONE,
 		const CProxyData *proxyData = NULL);
@@ -553,7 +553,7 @@ class CDatagramSocketProxy : public CLibUDPSocket
 {
 public:
 	/* Constructor */
-	CDatagramSocketProxy(
+	explicit CDatagramSocketProxy(
 		amuleIPV4Address &address,
 		muleSocketFlags flags = MULE_SOCKET_NONE,
 		const CProxyData *proxyData = NULL);

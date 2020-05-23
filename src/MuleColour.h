@@ -39,15 +39,15 @@ public:
 	enum ColourComponent { COLOUR_R = 1, COLOUR_G = 2, COLOUR_B = 4 };
 
 	CMuleColour() { Init(); Set(0,0,0); }
-	CMuleColour(const wxColour& colour) { Init(); Set(colour.Red(), colour.Green(), colour.Blue()); }
+	explicit CMuleColour(const wxColour& colour) { Init(); Set(colour.Red(), colour.Green(), colour.Blue()); }
 	CMuleColour(byte r, byte g, byte b) { Init(); Set(r,g,b); }
-	CMuleColour(unsigned long rgb)
+	explicit CMuleColour(unsigned long rgb)
 	{
 		Init();
 		Set((rgb & 0xFF), (rgb >> 8) & 0xFF, (rgb >> 16) & 0xFF);
 	}
 
-	CMuleColour(wxSystemColour colour)
+	explicit CMuleColour(wxSystemColour colour)
 	{
 		Init();
 		const wxColour& wxcolour = wxSystemSettings::GetColour(colour);

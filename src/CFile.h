@@ -65,8 +65,8 @@ public:
 	 * To check if the file was successfully opened, a
 	 * call to IsOpened() is required.
 	 */
-	CFile(const CPath& path, OpenMode mode = read);
-	CFile(const wxString& path, OpenMode mode = read);
+	explicit CFile(const CPath& path, OpenMode mode = read);
+	explicit CFile(const wxString& path, OpenMode mode = read);
 
 	/**
 	 * Destructor, closes the file if opened.
@@ -212,7 +212,7 @@ private:
  * This exception is thrown by CFile if a seek or tell fails.
  */
 struct CSeekFailureException : public CIOFailureException {
-	CSeekFailureException(const wxString& desc);
+	explicit CSeekFailureException(const wxString& desc);
 };
 
 

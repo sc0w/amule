@@ -39,7 +39,7 @@ DECLARE_LOCAL_EVENT_TYPE(wxEVT_CORE_SERVER_DNS_DONE, wxEVT_USER_FIRST+SERVER_DNS
 class CMuleInternalEvent : public wxEvent
 {
 public:
-	CMuleInternalEvent(int event, int id = wxID_ANY)
+	explicit CMuleInternalEvent(int event, int id = wxID_ANY)
 		: wxEvent(id, event),
 		  m_ptr(NULL),
 		  m_value(0),
