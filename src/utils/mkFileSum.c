@@ -93,8 +93,7 @@ int main()
 	MD5Init(&context);
 
 	while (state != 0x00ff) {
-		int c;
-		c = getchar();
+		int c = getchar();
 		state = table[state][GetCharCode(c)];
 		if (state & 0x0800) {
 			buffer[count++] = '\\';

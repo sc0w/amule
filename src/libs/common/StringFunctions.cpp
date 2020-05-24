@@ -71,8 +71,7 @@ wxString URLEncode(const wxString& sIn)
 	wxString sOut;
 
 	for ( unsigned int i = 0; i < sIn.Length(); ++i ) {
-		unsigned char curChar;
-		curChar = sIn.GetChar( i );
+		unsigned char curChar = sIn.GetChar( i );
 
 		if ( isalnum( curChar ) ) {
 	        sOut += curChar;

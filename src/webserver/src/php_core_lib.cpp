@@ -307,8 +307,7 @@ void php_native_split(PHP_VALUE_NODE *result)
 	}
 	si = get_scope_item(g_current_scope, "__param_2");
 	if ( si ) {
-		PHP_VALUE_NODE *split_limit;
-		split_limit = &si->var->value;
+		PHP_VALUE_NODE *split_limit = &si->var->value;
 		cast_value_dnum(split_limit);
 	} else {
 		php_report_error(PHP_ERROR, "Invalid or missing argument: string");
