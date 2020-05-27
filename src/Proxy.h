@@ -267,14 +267,14 @@ protected:
 	//
 	// Member variables
 	//
-	char			m_buffer[PROXY_BUFFER_SIZE];
+	char			m_buffer[PROXY_BUFFER_SIZE] = {};
 	bool			m_isLost;
 	bool			m_isConnected;
 	bool			m_canReceive;
 	bool			m_canSend;
 	bool			m_ok;
 	unsigned int	m_lastRead;
-	int				m_lastError;
+	int				m_lastError = 0;
 	//
 	// Will be initialized at Start()
 	//
@@ -572,7 +572,7 @@ private:
 	bool			m_udpSocketOk;
 	CProxySocket		m_proxyTCPSocket;
 	enum UDPOperation	m_lastUDPOperation;
-	unsigned int		m_lastUDPOverhead;
+	unsigned int		m_lastUDPOverhead = 0;
 	wxMutex			m_socketLocker;
 };
 

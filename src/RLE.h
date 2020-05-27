@@ -77,9 +77,9 @@ private:
 
 	// Encode: source data (original or diff in diff mode)
 	// Decode: store decoded data
-	uint8 *m_buff;
+	uint8 *m_buff = 0;
 	// Unpacked size
-	int m_len;
+	int m_len = 0;
 	// Use differential encoding
 	bool m_use_diff;
 };

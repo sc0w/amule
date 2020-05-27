@@ -614,7 +614,7 @@ private:
 	bool			m_blocksWrite;
 	char *			m_readBuffer;
 	uint32			m_readBufferSize;
-	char *			m_readBufferPtr;
+	char *			m_readBufferPtr = "";
 	bool			m_readPending;
 	uint32			m_readBufferContent;
 	bool			m_eventPending;

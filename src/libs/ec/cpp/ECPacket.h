@@ -62,7 +62,7 @@ class CECPacket : public CECEmptyTag {
 
 		bool ReadFromSocket(CECSocket& socket);
 		bool WritePacket(CECSocket& socket) const;
-		ec_opcode_t	m_opCode;
+		ec_opcode_t	m_opCode = NULL;
 };
 
 bool ECLogIsEnabled();

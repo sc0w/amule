@@ -204,7 +204,7 @@ private:
 	CPath m_filePath;
 
 	//! Are we using safe write mode?
-	bool m_safeWrite;
+	bool m_safeWrite = false;
 };
 
 

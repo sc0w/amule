@@ -84,7 +84,7 @@ protected:
 private:
 	uint32	m_nCount[2];
 	uint32	m_nHash[5];
-	uint32	m_nBuffer[16];
+	uint32	m_nBuffer[16] = {};
 };
 
 #define SHA1_BLOCK_SIZE		64

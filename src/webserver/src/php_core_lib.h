@@ -56,7 +56,7 @@ class CPhPLibContext {
 		PHP_SYN_NODE *m_syn_tree_top;
 		PHP_SCOPE_TABLE m_global_scope;
 
-		CWriteStrBuffer *m_curr_str_buffer;
+		CWriteStrBuffer *m_curr_str_buffer = NULL;
 
 		CWebServerBase *m_server;
 	public:

@@ -121,7 +121,7 @@ private:
 	//! The actual file object.
 	wxFFile		m_file;
 	//! The mode in with which the file was opened.
-	EOpenMode	m_mode;
+	EOpenMode	m_mode = NULL;
 };
 
 #endif /* TEXTFILE_H */
