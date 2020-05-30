@@ -2095,7 +2095,7 @@ int yyparse ();
 #endif
 #else /* ! YYPARSE_PARAM */
 #if defined __STDC__ || defined __cplusplus
-int yyparse (void);
+
 #else
 int yyparse ();
 #endif
