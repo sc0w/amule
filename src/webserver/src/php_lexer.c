@@ -783,8 +783,6 @@ void phpset_lineno (int line_number  );
 #ifndef YY_SKIP_YYWRAP
 #ifdef __cplusplus
 extern "C" int phpwrap (void );
-#else
-extern int phpwrap (void );
 #endif
 #endif
 
@@ -2045,10 +2043,6 @@ static void php_load_buffer_state  (void)
 	phpfree((void *) b  );
 }
 
-#ifndef __cplusplus
-extern int isatty (int );
-#endif /* __cplusplus */
-    
 /* Initializes or reinitializes a buffer.
  * This function is sometimes called more than once on the same buffer,
  * such as during a phprestart() or at EOF.
