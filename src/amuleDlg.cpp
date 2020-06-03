@@ -1060,14 +1060,14 @@ void CamuleDlg::DoIconize(bool iconize)
 void CamuleDlg::OnMinimize(wxIconizeEvent& evt)
 {
 // Evil Hack: check if the mouse is inside the window
-//#ifndef __WINDOWS__
-//	if (GetScreenRect().Contains(wxGetMousePosition()))
-//#endif
+#ifndef __WINDOWS__
+	if (!GetScreenRect().Contains(wxGetMousePosition()))
+#endif
 	{
 		if (m_prefsDialog && m_prefsDialog->IsShown()) {
 			// Veto.
 		} else {
-			if ((m_wndTaskbarNotifier) && (GetScreenRect().Contains(wxGetMousePosition()))) {
+			if (m_wndTaskbarNotifier) {
 #if wxCHECK_VERSION(2, 9, 0)
 				DoIconize(evt.IsIconized());
 #else
