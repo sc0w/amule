@@ -1071,9 +1071,9 @@ void CamuleDlg::OnMinimize(wxIconizeEvent& evt)
 //#if wxCHECK_VERSION(2, 9, 0)
 //				DoIconize(evt.IsIconized());
 //#else
-				if (GetScreenRect().Contains(wxGetMousePosition()) && !evt.Iconized())
+				if (GetScreenRect().Contains(wxGetMousePosition()) && evt.Iconized())
 					DoIconize(evt.Iconized());
-				else if (evt.Iconized())
+				else if (!evt.Iconized())
 					DoIconize(evt.Iconized());
 //#endif
 			}
