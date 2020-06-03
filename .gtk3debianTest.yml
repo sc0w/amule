@@ -27,6 +27,10 @@ requires:
     - wx3.0-i18n
     - zlib1g-dev
 
+variables:
+  - AMULE_VERSION="2.3.2+git20200530.3a77afb-1_amd64.deb"
+  - AMULE_VERSION_ALL="2.3.2+git20200530.3a77afb-1_all.deb"
+
 build_scripts:
   - rm -R debian
   - mkdir debgit
@@ -39,13 +43,13 @@ build_scripts:
   - egrep -lRZ 'libwxgtk3.0-dev' . | xargs -0 -l sed -i -e 's/libwxgtk3.0-dev/libwxgtk3.0-gtk3-dev/g'
   - ./gtk3buildPackages.sh $CPU_COUNT
   - cd ..
-  - curl -F file=@amule_2.3.2-6_amd64.deb -F expires=6m -F no_index=true https://api.anonymousfiles.io/ && echo
-  - curl -F file=@amule-utils-gui_2.3.2-6_amd64.deb -F expires=6m -F no_index=true https://api.anonymousfiles.io/ && echo
-  - curl -F file=@amule-utils-gui-dbgsym_2.3.2-6_amd64.deb -F expires=6m -F no_index=true https://api.anonymousfiles.io/ && echo
-  - curl -F file=@amule-dbgsym_2.3.2-6_amd64.deb -F expires=6m -F no_index=true https://api.anonymousfiles.io/ && echo
-  - curl -F file=@amule-daemon_2.3.2-6_amd64.deb -F expires=6m -F no_index=true https://api.anonymousfiles.io/ && echo
-  - curl -F file=@amule-utils_2.3.2-6_amd64.deb -F expires=6m -F no_index=true https://api.anonymousfiles.io/ && echo
-  - curl -F file=@amule-daemon-dbgsym_2.3.2-6_amd64.deb -F expires=6m -F no_index=true https://api.anonymousfiles.io/ && echo
-  - curl -F file=@amule-utils-dbgsym_2.3.2-6_amd64.deb -F expires=6m -F no_index=true https://api.anonymousfiles.io/ && echo
-  - curl -F file=@amule-common_2.3.2-6_all.deb -F expires=6m -F no_index=true https://api.anonymousfiles.io/ && echo
-  - curl -F file=@amule-gnome-support_2.3.2-6_all.deb -F expires=6m -F no_index=true https://api.anonymousfiles.io/ && echo
+  - curl -F file=@amule_$AMULE_VERSION -F expires=6m -F no_index=true https://api.anonymousfiles.io/ && echo
+  - curl -F file=@amule-utils-gui_$AMULE_VERSION -F expires=6m -F no_index=true https://api.anonymousfiles.io/ && echo
+  - curl -F file=@amule-utils-gui-dbgsym_$AMULE_VERSION -F expires=6m -F no_index=true https://api.anonymousfiles.io/ && echo
+  - curl -F file=@amule-dbgsym_$AMULE_VERSION -F expires=6m -F no_index=true https://api.anonymousfiles.io/ && echo
+  - curl -F file=@amule-daemon_$AMULE_VERSION -F expires=6m -F no_index=true https://api.anonymousfiles.io/ && echo
+  - curl -F file=@amule-utils_$AMULE_VERSION -F expires=6m -F no_index=true https://api.anonymousfiles.io/ && echo
+  - curl -F file=@amule-daemon-dbgsym_$AMULE_VERSION -F expires=6m -F no_index=true https://api.anonymousfiles.io/ && echo
+  - curl -F file=@amule-utils-dbgsym_$AMULE_VERSION -F expires=6m -F no_index=true https://api.anonymousfiles.io/ && echo
+  - curl -F file=@amule-common_$AMULE_VERSION_ALL -F expires=6m -F no_index=true https://api.anonymousfiles.io/ && echo
+  - curl -F file=@amule-gnome-support_$AMULE_VERSION_ALL -F expires=6m -F no_index=true https://api.anonymousfiles.io/ && echo
