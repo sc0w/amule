@@ -1067,7 +1067,7 @@ void CamuleDlg::OnMinimize(wxIconizeEvent& evt)
 		if (m_prefsDialog && m_prefsDialog->IsShown()) {
 			// Veto.
 		} else {
-			if (m_wndTaskbarNotifier) {
+			if ((m_wndTaskbarNotifier) && (GetScreenRect().Contains(wxGetMousePosition()))) {
 #if wxCHECK_VERSION(2, 9, 0)
 				DoIconize(evt.IsIconized());
 #else
