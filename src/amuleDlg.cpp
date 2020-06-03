@@ -1061,25 +1061,23 @@ void CamuleDlg::OnMinimize(wxIconizeEvent& evt)
 {
 // Evil Hack: check if the mouse is inside the window
 //#ifndef __WINDOWS__
-//	if (!GetScreenRect().Contains(wxGetMousePosition()))
+//	if (GetScreenRect().Contains(wxGetMousePosition()))
 //#endif
-	{
+printf("A\n");
 		if (m_prefsDialog && m_prefsDialog->IsShown()) {
 			// Veto.
+			printf("B\n");
 		} else {
+			printf("C\n");
 			if (m_wndTaskbarNotifier) {
-//#if wxCHECK_VERSION(2, 9, 0)
-//				DoIconize(evt.IsIconized());
-//#else
-				if (GetScreenRect().Contains(wxGetMousePosition()) && evt.Iconized())
-					DoIconize(evt.Iconized());
-				else if (!evt.Iconized())
-					DoIconize(evt.Iconized());
-//#endif
+				printf("D\n");
+				DoIconize(evt.Iconized());
 			}
+			printf("E\n");
 			evt.Skip();
 		}
-	}
+		printf("F\n\n");
+
 }
 
 void CamuleDlg::OnGUITimer(wxTimerEvent& WXUNUSED(evt))
