@@ -1074,20 +1074,15 @@ wxString GetConfigDir(const wxString &configFileBase)
 
 /*************************** Locale specific stuff ***************************/
 
-#ifndef __WINDOWS__
-#	define	SETWINLANG(LANG, SUBLANG)
-#else
-#	define	SETWINLANG(LANG, SUBLANG) \
-	info.WinLang = LANG; \
+#ifdef __WINDOWS__
+#	define info.WinLang = LANG; \
 	info.WinSublang = SUBLANG;
 #endif
 
-#define CUSTOMLANGUAGE(wxid, iso, winlang, winsublang, dir, desc) \
-	info.Language = wxid;		\
+#define info.Language = wxid;		\
 	info.CanonicalName = wxT(iso);	\
 	info.LayoutDirection = dir;	\
 	info.Description = wxT(desc);	\
-	SETWINLANG(winlang, winsublang)	\
 	wxLocale::AddLanguage(info);
 
 void InitCustomLanguages()
@@ -1095,6 +1090,7 @@ void InitCustomLanguages()
 	wxLanguageInfo info;
 
 #if !wxCHECK_VERSION(2, 9, 0)
+#define CUSTOMLANGUAGE(wxid, iso, winlang, winsublang, dir, desc)
 	CUSTOMLANGUAGE(wxLANGUAGE_ASTURIAN,	"ast",	0,	0,	wxLayout_LeftToRight,	"Asturian");
 #endif
 }

@@ -977,13 +977,12 @@ bool CAICHHashSet::IsPartDataAvailable(uint64 nPartStartPos)
 	return true;
 }
 
-// VC++ defines Assert as ASSERT. VC++ also defines VERIFY MACRO, which is the equivalent of ASSERT but also works in Released builds.
-
-#define VERIFY(x) wxASSERT(x)
 
 void CAICHHashSet::DbgTest()
 {
 #ifdef _DEBUG
+// VC++ defines Assert as ASSERT. VC++ also defines VERIFY MACRO, which is the equivalent of ASSERT but also works in Released builds.
+#define VERIFY(x) wxASSERT(x)
 	//define TESTSIZE 4294567295
 	uint8 maxLevel = 0;
 	uint32 cHash = 1;

@@ -52,14 +52,6 @@
 #include "Logger.h"
 #include "Preferences.h"	// Needed for thePrefs
 
-#ifdef __BSD__
-	// glibc -> bsd libc
-	#define round rint
-#else
-	#define round(x) floor(x+0.5)
-#endif /* __BSD__ */
-
-
 #ifndef CLIENT_GUI
 
 /*----- CPreciseRateCounter -----*/

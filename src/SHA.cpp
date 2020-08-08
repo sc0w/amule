@@ -78,8 +78,6 @@ CSHA::CSHA()
     It may well fail, in which case the definitions will need to be set by
     editing at the points marked **** EDIT HERE IF NECESSARY **** below.
 */
-#define SHA_LITTLE_ENDIAN   1234 /* byte 0 is least significant (i386) */
-#define SHA_BIG_ENDIAN      4321 /* byte 0 is most significant (mc68k) */
 
 #define rotl32(x,n) (((x) << n) | ((x) >> (32 - n)))
 
