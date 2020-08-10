@@ -1707,7 +1707,7 @@ void CUpDownClient::ConnectionEstablished()
 	switch(GetUploadState()){
 		case US_CONNECTING:
 		case US_WAITCALLBACK:
-			if (theApp->uploadqueue->IsDownloading(this)) {
+			if ((theApp->uploadqueue->IsDownloading(this)) && (m_bReaskPending)){
 				SetUploadState(US_UPLOADING);
 				CPacket* packet = new CPacket(OP_ACCEPTUPLOADREQ, 0, OP_EDONKEYPROT);
 				theStats::AddUpOverheadFileRequest(packet->GetPacketSize());
