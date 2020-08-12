@@ -1334,7 +1334,9 @@ YY_RULE_SETUP
 		if ( !phpin ) {
 			printf("WARNING: include file [%s] can not be opened\n", phptext+1);
 		} else {
-			php_switch_to_buffer(php_create_buffer(phpin,YY_BUF_SIZE ));
+			YY_BUFFER_STATE b =php_create_buffer(phpin,YY_BUF_SIZE );
+			php_switch_to_buffer(b);
+			php_delete_buffer(b);
 		}
 	}
         BEGIN(INITIAL);
