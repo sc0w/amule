@@ -188,6 +188,7 @@ wxSizer *clientDetails( wxWindow *parent, bool call_fit = TRUE, bool set_sizer =
 #define IDC_MACHIDEONCLOSE 10118
 #define IDC_ENABLETRAYICON 10119
 #define IDC_MINTRAY 10120
+#define IDC_NOTIF 99999
 #define IDC_TOOLTIPDELAY 10121
 #define IDC_BROWSERSELF 10122
 #define IDC_SELBROWSER 10123

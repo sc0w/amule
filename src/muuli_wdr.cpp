@@ -1491,6 +1491,10 @@ wxSizer *PreferencesGeneralTab( wxWindow *parent, bool call_fit, bool set_sizer 
     item12->SetToolTip( _("Enabling this will make aMule minimize to the System Tray, rather than the taskbar.") );
     item0->Add( item12, 0, wxALIGN_CENTER_VERTICAL, 0 );
 
+    wxCheckBox *notifications = new wxCheckBox( parent, IDC_NOTIF, _("Notifications"), wxDefaultPosition, wxDefaultSize, 0 );
+    notifications->SetToolTip( _("Enabling this will make aMule minimize to the System Tray, rather than the taskbar.") );
+    item0->Add( notifications, 0, wxALIGN_CENTER_VERTICAL, 0 );
+
     wxBoxSizer *item13 = new wxBoxSizer( wxHORIZONTAL );
 
     wxStaticText *item14 = new wxStaticText( parent, -1, _("Tooltip delay time: "), wxDefaultPosition, wxDefaultSize, 0 );
