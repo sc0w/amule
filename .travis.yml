@@ -19,6 +19,7 @@ before_install:
   - chmod +x docker-build
 
 install:
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
   - ./docker-build --name ${DISTRO} --config .$JOB.yml --install
 
 script:
