@@ -220,10 +220,10 @@ sub create_met_file {
 	if ($_[2] < 4290048000) {
 		# Not large file
 		$large_file = "no";
-		printf MET &byte_string(0xe0);
+		printf MET &bytes_string(0xe0);
 	} else {
 		$large_file = "yes";
-		printf MET &byte_string(0xe2);
+		printf MET &bytes_string(0xe2);
 	}
 	# File modification time. 0 to force aMule rehash. (4 bytes)
 	print MET &int32_string(0);
@@ -308,12 +308,12 @@ sub create_met_file {
 	close(MET);
 }
 
-sub byte_string {
+sub bytes_string {
 	sprintf("%c",$_[0]);
 }
 
 sub int16_string {
-	&byte_string($_[0] % 256) . &byte_string($_[0] / 256);
+	&bytes_string($_[0] % 256) . &bytes_string($_[0] / 256);
 }
 
 sub int32_string {
@@ -328,7 +328,7 @@ sub hash_string {
 	my $i = 0;
 	my $final_string = "";
 	while ($i < 32) {
-		$final_string = $final_string . &byte_string(hex(substr($_[0],$i,2)));
+		$final_string = $final_string . &bytes_string(hex(substr($_[0],$i,2)));
 		$i += 2;
 	}
 	$final_string;
@@ -340,12 +340,12 @@ sub tag_string {
 	my $final_string = "";
 
 	# Tag type
-	$final_string = $final_string . &byte_string($_[0]);
+	$final_string = $final_string . &bytes_string($_[0]);
 
 	if ($_[1] == 0) {
 		# Byte ID tag
 		$final_string = $final_string . &int16_string(1);
-		$final_string = $final_string . &byte_string($_[2]);
+		$final_string = $final_string . &bytes_string($_[2]);
 	} else {
 		# String ID tag
 		$final_string = $final_string . &int16_string(length $_[2]) . $_[2];

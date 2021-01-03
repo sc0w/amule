@@ -69,7 +69,7 @@ void CPreciseRateCounter::CalculateRate(uint64_t now)
 	wxMutexLocker lock(m_mutex);
 
 	m_total += m_tmp_sum;
-	m_byte_history.push_back(m_tmp_sum);
+	m_bytes_history.push_back(m_tmp_sum);
 	m_tick_history.push_back(now);
 	m_tmp_sum = 0;
 
@@ -77,17 +77,17 @@ void CPreciseRateCounter::CalculateRate(uint64_t now)
 
 	// Checking maximal timespan, but make sure not to remove
 	// the extra node in m_tick_history.
-	while (timespan > m_timespan && !m_byte_history.empty()) {
-		m_total -= m_byte_history.front();
-		m_byte_history.pop_front();
+	while (timespan > m_timespan && !m_bytes_history.empty()) {
+		m_total -= m_bytes_history.front();
+		m_bytes_history.pop_front();
 		m_tick_history.pop_front();
 		timespan = now - m_tick_history.front();
 	}
 
 	// Count rate/average
 	if (m_count_average) {
-		if (!m_byte_history.empty()) {
-			m_rate = m_total / (double)m_byte_history.size();
+		if (!m_bytes_history.empty()) {
+			m_rate = m_total / (double)m_bytes_history.size();
 		}
 	} else {
 		if (timespan > 0) {
@@ -619,7 +619,7 @@ void CStatistics::ComputeAverages(
 
 	runningAvg->m_timespan = avgTime * 1000;
 	runningAvg->m_tick_history.clear();
-	runningAvg->m_byte_history.clear();
+	runningAvg->m_bytes_history.clear();
 	runningAvg->m_total = 0;
 	runningAvg->m_tmp_sum = 0;
 
@@ -649,7 +649,7 @@ void CStatistics::ComputeAverages(
 				wxCHECK_RET(false, wxT("ComputeAverages called with unsupported graph type."));
 			}
 
-			runningAvg->m_byte_history.push_front(value);
+			runningAvg->m_bytes_history.push_front(value);
 			runningAvg->m_total += value;
 		} else {
 			break;

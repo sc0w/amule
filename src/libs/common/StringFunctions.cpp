@@ -64,7 +64,7 @@ Unicode2CharBuf unicode2char(const wxChar* s)
 }
 
 
-static byte base16Chars[17] = "0123456789ABCDEF";
+static bytes base16Chars[17] = "0123456789ABCDEF";
 
 wxString URLEncode(const wxString& sIn)
 {

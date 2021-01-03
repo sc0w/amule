@@ -80,7 +80,7 @@ class MD4
     // Needed to reverse byte order on BIG ENDIAN machines
 #if wxBYTE_ORDER == wxBIG_ENDIAN
 
-    void byteReverse(unsigned char *buf, unsigned longs);
+    void bytesReverse(unsigned char *buf, unsigned longs);
 #endif
 
   public:

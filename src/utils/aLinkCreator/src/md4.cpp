@@ -46,7 +46,7 @@
 /// BIG ENDIAN byte reversing
 #if wxBYTE_ORDER == wxBIG_ENDIAN
 // Note: this code is harmless on little-endian machines.
-void MD4::byteReverse(unsigned char *buf, unsigned longs)
+void MD4::bytesReverse(unsigned char *buf, unsigned longs)
 {
   do
     {
@@ -59,7 +59,7 @@ void MD4::byteReverse(unsigned char *buf, unsigned longs)
   while (--longs);
 }
 #else
-#define byteReverse(buf, len)	do { } while (0)
+#define bytesReverse(buf, len)	do { } while (0)
 #endif
 
 /// Start MD4 accumulation.
@@ -100,7 +100,7 @@ void MD4::MD4Update(struct MD4Context *ctx, unsigned char const *buf,
           return;
         }
       memcpy(p, buf, t);
-      byteReverse(ctx->in, 16);
+      bytesReverse(ctx->in, 16);
       MD4Transform(ctx->buf, (uint32_t *) ctx->in);
       buf += t;
       len -= t;
@@ -110,7 +110,7 @@ void MD4::MD4Update(struct MD4Context *ctx, unsigned char const *buf,
   while (len >= 64)
     {
       memcpy(ctx->in, buf, 64);
-      byteReverse(ctx->in, 16);
+      bytesReverse(ctx->in, 16);
       MD4Transform(ctx->buf, (uint32_t *) ctx->in);
       buf += 64;
       len -= 64;
@@ -144,7 +144,7 @@ void MD4::MD4Final(struct MD4Context *ctx, unsigned char* digest)
     {
       // Two lots of padding:  Pad the first block to 64 bytes
       memset(p, 0, count);
-      byteReverse(ctx->in, 16);
+      bytesReverse(ctx->in, 16);
       MD4Transform(ctx->buf, (uint32_t *) ctx->in);
 
       // Now fill the next block with 56 bytes
@@ -155,7 +155,7 @@ void MD4::MD4Final(struct MD4Context *ctx, unsigned char* digest)
       // Pad block to 56 bytes
       memset(p, 0, count - 8);
     }
-  byteReverse(ctx->in, 14);
+  bytesReverse(ctx->in, 14);
 
   // Append length in bits and transform
   uint32_t * in32 = (uint32_t *) ctx->in;
@@ -163,7 +163,7 @@ void MD4::MD4Final(struct MD4Context *ctx, unsigned char* digest)
   in32[15] = ctx->bits[1];
 
   MD4Transform(ctx->buf, (uint32_t *) ctx->in);
-  byteReverse((unsigned char *) ctx->buf, 4);
+  bytesReverse((unsigned char *) ctx->buf, 4);
 
   if (digest!=NULL)
     {

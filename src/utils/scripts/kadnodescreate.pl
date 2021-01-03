@@ -96,7 +96,7 @@ foreach $contact (@ARGV) {
 				&int32_string($ip) .
 				&int16_string($tcpport) .
 				&int16_string($udpport) .
-				&byte_string($type);
+				&bytes_string($type);
 	} else {
 		die "Malformed contact line, can't continue: " . $contact . "\n";
 	}
@@ -144,12 +144,12 @@ sub check_hash {
 
 #Hex write functions
 
-sub byte_string {
+sub bytes_string {
 	sprintf("%c",$_[0]);
 }
 
 sub int16_string {
-	&byte_string($_[0] % 256) . &byte_string($_[0] / 256);
+	&bytes_string($_[0] % 256) . &bytes_string($_[0] / 256);
 }
 
 sub int32_string {
@@ -164,7 +164,7 @@ sub hash_string {
 	my $i = 0;
 	my $final_string = "";
 	while ($i < 32) {
-		$final_string = $final_string . &byte_string(hex(substr($_[0],$i,2)));
+		$final_string = $final_string . &bytes_string(hex(substr($_[0],$i,2)));
 		$i += 2;
 	}
 	$final_string;

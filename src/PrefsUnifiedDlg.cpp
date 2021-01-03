@@ -1156,7 +1156,7 @@ void PrefsUnifiedDlg::OnScrollBarChange( wxScrollEvent& event )
 	case IDC_FILEBUFFERSIZE:
 		id = IDC_FILEBUFFERSIZE_STATIC;
 		// Yes, it seems odd to add the singular form here, but other languages might need to know the number to select the appropriate translation
-		label = CFormat(wxPLURAL("File Buffer Size: %d byte", "File Buffer Size: %d bytes", event.GetPosition() * 15000)) % (event.GetPosition() * 15000);
+		label = CFormat(wxPLURAL("File Buffer Size: %d bytes", "File Buffer Size: %d bytes", event.GetPosition() * 15000)) % (event.GetPosition() * 15000);
 		break;
 
 	case IDC_QUEUESIZE:

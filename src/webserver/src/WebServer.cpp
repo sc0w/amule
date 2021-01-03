@@ -1138,9 +1138,9 @@ CDynPngImage::CDynPngImage(int w, int h) : CAnyImage(w, h)
 	// Allocate array of "row pointers" - libpng need it in this form
 	// Fill it also with the image data
 	//
-	m_img_data = new png_byte[3*m_width*m_height];
+	m_img_data = new png_bytes[3*m_width*m_height];
 	memset(m_img_data, 0, 3*m_width*m_height);
-	m_row_ptrs = new png_bytep [m_height];
+	m_row_ptrs = new png_bytesp [m_height];
 	for (int i = 0; i < m_height;i++) {
 		m_row_ptrs[i] = &m_img_data[3*m_width*i];
 	}
@@ -1153,7 +1153,7 @@ CDynPngImage::~CDynPngImage()
 	delete [] m_img_data;
 }
 
-void CDynPngImage::png_write_fn(png_structp png_ptr, png_bytep data, png_size_t length)
+void CDynPngImage::png_write_fn(png_structp png_ptr, png_bytesp data, png_size_t length)
 {
 	CDynPngImage *This = static_cast<CDynPngImage *>(png_get_io_ptr(png_ptr));
 	wxASSERT((png_size_t)(This->m_size + length) <= (png_size_t)This->m_alloc_size);
@@ -1173,7 +1173,7 @@ unsigned char *CDynPngImage::RequestData(int &size)
 
 	m_size = 0;
 	png_write_info(png_ptr, info_ptr);
-	png_write_image(png_ptr, (png_bytep *)m_row_ptrs);
+	png_write_image(png_ptr, (png_bytesp *)m_row_ptrs);
 	png_write_end(png_ptr, 0);
 	png_destroy_write_struct(&png_ptr, &info_ptr);
 
@@ -1207,8 +1207,8 @@ void CDynProgressImage::DrawImage()
 			memset(m_row_ptrs[i], 0, 3*m_width);
 	}
 	for(int i = 0; i < m_height/2; i++) {
-		png_bytep u_row = m_row_ptrs[i];
-		png_bytep d_row = m_row_ptrs[m_height-i-1];
+		png_bytesp u_row = m_row_ptrs[i];
+		png_bytesp d_row = m_row_ptrs[m_height-i-1];
 		for(int j = 0; j < m_width; j++) {
 			set_rgb_color_val(u_row+3*j, m_ColorLine[j], m_modifiers[i]);
 			set_rgb_color_val(d_row+3*j, m_ColorLine[j], m_modifiers[i]);
@@ -1396,8 +1396,8 @@ CDynStatisticImage::CDynStatisticImage(int height, bool scale1024, CStatsData *d
 	m_y_axis_size = m_height - m_bottom_margin;
 	// allocate storage for background. Using 1 chunk to speed up
 	// the rendering
-	m_background = new png_byte[m_width*m_height*3];
-	m_row_bg_ptrs = new png_bytep[m_height];
+	m_background = new png_bytes[m_width*m_height*3];
+	m_row_bg_ptrs = new png_bytesp[m_height];
 	for(int i = 0; i < m_height; i++) {
 		m_row_bg_ptrs[i] = &m_background[i*m_width*3];
 	}
@@ -1407,7 +1407,7 @@ CDynStatisticImage::CDynStatisticImage(int height, bool scale1024, CStatsData *d
 	//
 	static const COLORTYPE bg_color = RGB(0x00, 0x00, 0x40);
 	for(int i = 0; i < m_height; i++) {
-		png_bytep u_row = m_row_bg_ptrs[i];
+		png_bytesp u_row = m_row_bg_ptrs[i];
 		for(int j = 0; j < m_width; j++) {
 			set_rgb_color_val(u_row+3*j, bg_color, 0);
 		}
@@ -1418,7 +1418,7 @@ CDynStatisticImage::CDynStatisticImage(int height, bool scale1024, CStatsData *d
 	static const COLORTYPE axis_color = RGB(0xff, 0xff, 0xff);
 	// Y
 	for(int i = m_bottom_margin; i < m_y_axis_size; i++) {
-		png_bytep u_row = m_row_bg_ptrs[i];
+		png_bytesp u_row = m_row_bg_ptrs[i];
 		set_rgb_color_val(u_row+3*(m_left_margin + 0), axis_color, 0);
 		set_rgb_color_val(u_row+3*(m_left_margin + 1), axis_color, 0);
 	}
@@ -1431,7 +1431,7 @@ CDynStatisticImage::CDynStatisticImage(int height, bool scale1024, CStatsData *d
 	// horisontal grid
 	int v_grid_size = m_y_axis_size / 4;
 	for(int i = m_y_axis_size - v_grid_size; i >= v_grid_size; i -= v_grid_size) {
-		png_bytep u_row = m_row_bg_ptrs[i];
+		png_bytesp u_row = m_row_bg_ptrs[i];
 		for(int j = m_left_margin; j < m_width; j++) {
 			if ( (j % 10) < 5 ) {
 				set_rgb_color_val(u_row+3*j, axis_color, 0);
@@ -1556,7 +1556,7 @@ void CDynStatisticImage::DrawImage()
 		}
 		for(int k = min_y; k <= max_y; k++) {
 			int i = m_y_axis_size - k;
-			png_bytep u_row = m_row_ptrs[i];
+			png_bytesp u_row = m_row_ptrs[i];
 			set_rgb_color_val(u_row+3*j, graph_color, 0);
 		}
 		prev_data = curr_data;
@@ -1588,9 +1588,9 @@ CNumImageMask::CNumImageMask(int number, int width, int height)
 	m_height = height;
 	m_width = width;
 
-	m_row_mask_ptrs = new png_bytep[m_height];
+	m_row_mask_ptrs = new png_bytesp[m_height];
 	for(int i = 0; i < m_height; i++) {
-		m_row_mask_ptrs[i] = new png_byte[3*m_width];
+		m_row_mask_ptrs[i] = new png_bytes[3*m_width];
 		memset(m_row_mask_ptrs[i], 0x00, 3*m_width);
 	}
 
@@ -1610,12 +1610,12 @@ CNumImageMask::~CNumImageMask()
 	delete [] m_row_mask_ptrs;
 }
 
-void CNumImageMask::Apply(png_bytep *image, int offx, int offy)
+void CNumImageMask::Apply(png_bytesp *image, int offx, int offy)
 {
 	offx *= 3;
 	for(int i = 0; i < m_height; i++) {
-		png_bytep img_row = image[offy + i];
-		png_bytep num_row = m_row_mask_ptrs[i];
+		png_bytesp img_row = image[offy + i];
+		png_bytesp num_row = m_row_mask_ptrs[i];
 		for(int j = 0; j < m_width*3; j++) {
 			img_row[offx + j] |= num_row[j];
 		}
@@ -1624,7 +1624,7 @@ void CNumImageMask::Apply(png_bytep *image, int offx, int offy)
 
 void CNumImageMask::DrawHorzLine(int off)
 {
-	png_bytep m_row = m_row_mask_ptrs[off*(m_v_segsize-1)];
+	png_bytesp m_row = m_row_mask_ptrs[off*(m_v_segsize-1)];
 	for(int i = 0; i < m_h_segsize; i++) {
 		m_row[i*3] = m_row[i*3+1] = m_row[i*3+2] = 0xff;
 	}
@@ -1633,7 +1633,7 @@ void CNumImageMask::DrawHorzLine(int off)
 void CNumImageMask::DrawVertLine(int offx, int offy)
 {
 	for(int i = 0; i < m_v_segsize; i++) {
-		png_bytep m_row = m_row_mask_ptrs[offy*(m_v_segsize-1)+i];
+		png_bytesp m_row = m_row_mask_ptrs[offy*(m_v_segsize-1)+i];
 		int x_idx = offx*(m_h_segsize-1)*3;
 		m_row[x_idx] = m_row[x_idx+1] = m_row[x_idx+2] = 0xff;
 	}
