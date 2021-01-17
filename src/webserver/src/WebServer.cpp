@@ -1138,7 +1138,7 @@ CDynPngImage::CDynPngImage(int w, int h) : CAnyImage(w, h)
 	// Allocate array of "row pointers" - libpng need it in this form
 	// Fill it also with the image data
 	//
-	m_img_data = new png_bytes[3*m_width*m_height];
+	m_img_data = new png_byte[3*m_width*m_height];
 	memset(m_img_data, 0, 3*m_width*m_height);
 	m_row_ptrs = new png_bytep [m_height];
 	for (int i = 0; i < m_height;i++) {
@@ -1396,7 +1396,7 @@ CDynStatisticImage::CDynStatisticImage(int height, bool scale1024, CStatsData *d
 	m_y_axis_size = m_height - m_bottom_margin;
 	// allocate storage for background. Using 1 chunk to speed up
 	// the rendering
-	m_background = new png_bytes[m_width*m_height*3];
+	m_background = new png_byte[m_width*m_height*3];
 	m_row_bg_ptrs = new png_bytep[m_height];
 	for(int i = 0; i < m_height; i++) {
 		m_row_bg_ptrs[i] = &m_background[i*m_width*3];
@@ -1590,7 +1590,7 @@ CNumImageMask::CNumImageMask(int number, int width, int height)
 
 	m_row_mask_ptrs = new png_bytep[m_height];
 	for(int i = 0; i < m_height; i++) {
-		m_row_mask_ptrs[i] = new png_bytes[3*m_width];
+		m_row_mask_ptrs[i] = new png_byte[3*m_width];
 		memset(m_row_mask_ptrs[i], 0x00, 3*m_width);
 	}
 
