@@ -88,8 +88,8 @@ public:
 private:
 	EIdentState		m_identState;
 	void			InitalizeIdent();
-	CreditStruct*	m_pCredits;
-	mule_byte			m_abyPublicKey[80];			// even keys which are not verified will be stored here, and - if verified - copied into the struct
+	CreditStruct*		m_pCredits;
+	mule_byte		m_abyPublicKey[80];			// even keys which are not verified will be stored here, and - if verified - copied into the struct
 	uint8			m_nPublicKeyLen;
 	uint32			m_dwIdentIP;
 	uint32			m_dwSecureWaitTime;
