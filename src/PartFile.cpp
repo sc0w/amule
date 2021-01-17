@@ -126,7 +126,7 @@ public:
 	uint64 end;						// This is the end offset of the data
 	Requested_Block_Struct *block;	// This is the requested block that this data relates to
 
-	PartFileBufferedData(CFileAutoClose& file, byte * data, uint64 _start, uint64 _end, Requested_Block_Struct *_block)
+	PartFileBufferedData(CFileAutoClose& file, mule_byte * data, uint64 _start, uint64 _end, Requested_Block_Struct *_block)
 		: start(_start), end(_end), block(_block)
 	{
 		area.StartWriteAt(file, start, end-start+1);
@@ -884,7 +884,7 @@ bool CPartFile::SavePartFile(bool Initial)
 		for (CGapList::const_iterator it = m_gaplist.begin(); it != m_gaplist.end(); ++it) {
 			wxString tagName = CFormat(wxT(" %u")) % i_pos;
 
-			// gap start = first missing byte but gap ends = first non-missing byte
+			// gap start = first missing mule_byte but gap ends = first non-missing mule_byte
 			// in edonkey but I think its easier to user the real limits
 			tagName[0] = FT_GAPSTART;
 			CTagIntSized(tagName, it.start(),	IsLargeFile() ? 64 : 32).WriteTagToFile( &file );
@@ -2877,7 +2877,7 @@ int CPartFile::GetCommonFilePenalty()
 // Kry - transize is 32bits, no packet can be more than that (this is
 // compressed size). Even 32bits is too much imho.As for the return size,
 // look at the lenData below.
-uint32 CPartFile::WriteToBuffer(uint32 transize, byte* data, uint64 start, uint64 end, Requested_Block_Struct *block, const CUpDownClient* client)
+uint32 CPartFile::WriteToBuffer(uint32 transize, mule_byte* data, uint64 start, uint64 end, Requested_Block_Struct *block, const CUpDownClient* client)
 {
 	// Increment transferred bytes counter for this file
 	transferred += transize;

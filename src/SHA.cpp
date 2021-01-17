@@ -58,8 +58,8 @@
  ---------------------------------------------------------------------------
  Issue Date: 30/11/2002
 
- This is a byte oriented version of SHA1 that operates on arrays of bytes
- stored in memory. It runs at 22 cycles per byte on a Pentium P4 processor
+ This is a mule_byte oriented version of SHA1 that operates on arrays of bytes
+ stored in memory. It runs at 22 cycles per mule_byte on a Pentium P4 processor
 */
 
 #include "SHA.h"
@@ -78,8 +78,8 @@ CSHA::CSHA()
     It may well fail, in which case the definitions will need to be set by
     editing at the points marked **** EDIT HERE IF NECESSARY **** below.
 */
-#define SHA_LITTLE_ENDIAN   1234 /* byte 0 is least significant (i386) */
-#define SHA_BIG_ENDIAN      4321 /* byte 0 is most significant (mc68k) */
+#define SHA_LITTLE_ENDIAN   1234 /* mule_byte 0 is least significant (i386) */
+#define SHA_BIG_ENDIAN      4321 /* mule_byte 0 is most significant (mc68k) */
 
 #define rotl32(x,n) (((x) << n) | ((x) >> (32 - n)))
 
@@ -93,7 +93,7 @@ CSHA::CSHA()
 
 #define SHA1_MASK   (SHA1_BLOCK_SIZE - 1)
 
-/* reverse byte order in 32-bit words   */
+/* reverse mule_byte order in 32-bit words   */
 
 #define ch(x,y,z)       (((x) & (y)) ^ (~(x) & (z)))
 #define parity(x,y,z)   ((x) ^ (y) ^ (z))
@@ -213,15 +213,15 @@ void CSHA::Finish(CAICHHash& Hash)
 	uint32    i = (uint32)(m_nCount[0] & SHA1_MASK);
 
     /* mask out the rest of any partial 32-bit word and then set    */
-    /* the next byte to 0x80. On big-endian machines any bytes in   */
+    /* the next mule_byte to 0x80. On big-endian machines any bytes in   */
     /* the buffer will be at the top end of 32 bit words, on little */
     /* endian machines they will be at the bottom. Hence the AND    */
     /* and OR masks above are reversed for little endian systems    */
-	/* Note that we can always add the first padding byte at this	*/
+	/* Note that we can always add the first padding mule_byte at this	*/
 	/* because the buffer always contains at least one empty slot	*/
     m_nBuffer[i >> 2] = (m_nBuffer[i >> 2] & mask[i & 3]) | bits[i & 3];
 
-    /* we need 9 or more empty positions, one for the padding byte  */
+    /* we need 9 or more empty positions, one for the padding mule_byte  */
     /* (above) and eight for the length count.  If there is not     */
     /* enough space pad and empty the buffer                        */
     if(i > SHA1_BLOCK_SIZE - 9)
@@ -236,7 +236,7 @@ void CSHA::Finish(CAICHHash& Hash)
     while(i < 14) /* and zero pad all but last two positions      */
         m_nBuffer[i++] = 0;
 
-    /* assemble the eight byte counter in in big-endian format		*/
+    /* assemble the eight mule_byte counter in in big-endian format		*/
     m_nBuffer[14] = swap_b32((m_nCount[1] << 3) | (m_nCount[0] >> 29));
     m_nBuffer[15] = swap_b32(m_nCount[0] << 3);
 

@@ -389,7 +389,7 @@ ConvStatus CPartFileConvert::performConvertToeMule(const CPath& fileName)
 
 		CPath::RemoveFile(newfilename.RemoveExt());
 		if (!oldfile.FileExists()) {
-			// data file does not exist. well, then create a 0 byte big one
+			// data file does not exist. well, then create a 0 mule_byte big one
 			CFile datafile;
 			ret = datafile.Create(newfilename.RemoveExt());
 		} else if (s_pfconverting->removeSource) {

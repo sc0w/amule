@@ -64,7 +64,7 @@ DECLARE_SIMPLE(CUInt128);
 
 // Each test uses only functionality previously tested.
 
-TEST_M(CUInt128, ConstructorAndToByteArray, wxT("Reading/writing byte sequences"))
+TEST_M(CUInt128, ConstructorAndToByteArray, wxT("Reading/writing mule_byte sequences"))
 {
 	uint8_t result[16];
 

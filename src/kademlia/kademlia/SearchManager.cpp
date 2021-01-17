@@ -234,8 +234,8 @@ void CSearchManager::GetWords(const wxString& str, WordList *words, bool allowDu
 	while (tkz.HasMoreTokens()) {
 		current_word = tkz.GetNextToken();
 		// TODO: We'd need a safe way to determine if a sequence which contains only 3 chars is a real word.
-		// Currently we do this by evaluating the UTF-8 byte count. This will work well for Western locales,
-		// AS LONG AS the min. byte count is 3(!). If the byte count is once changed to 2, this will not
+		// Currently we do this by evaluating the UTF-8 mule_byte count. This will work well for Western locales,
+		// AS LONG AS the min. mule_byte count is 3(!). If the mule_byte count is once changed to 2, this will not
 		// work properly any longer because there are a lot of Western characters which need 2 bytes in UTF-8.
 		// Maybe we need to evaluate the Unicode character values itself whether the characters are located
 		// in code ranges where single characters are known to represent words.

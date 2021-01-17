@@ -50,7 +50,7 @@ intType CMuleCollection::ReadInt(std::ifstream& infile)
 {
 	intType integer = 0;
 	infile.read(reinterpret_cast<char *>(&integer),sizeof(intType));
-	// TODO: byte-sex
+	// TODO: mule_byte-sex
 	return integer;
 }
 

@@ -118,7 +118,7 @@ CECTag::CECTag(ec_tagname_t name, const EC_IPv4_t& data) : m_tagName(name)
 /**
  * Creates a new CECTag instance, which contains a MD4 hash.
  *
- * This function takes care to store hash in network byte order.
+ * This function takes care to store hash in network mule_byte order.
  *
  * @param name TAG name
  * @param data The CMD4Hash class containing the MD4 hash.
@@ -1009,7 +1009,7 @@ void CECTag::DebugPrint(int level, bool print_empty) const
 					case EC_TAGTYPE_UINT128:
 						// Using any non-inline function from UInt128.h would break linkage
 						// of remote apps otherwise not using CUInt128. So just fall through
-						// and display the value as a byte-stream. Since the value is sent
+						// and display the value as a mule_byte-stream. Since the value is sent
 						// big-endian on the network, the visual result is correct, except
 						// for the intervening spaces...
 						//s2 = GetInt128Data().ToHexString(); break;

@@ -1732,7 +1732,7 @@ YY_BUFFER_STATE yyip_scan_string (yyconst char * yystr )
 
 /** Setup the input buffer state to scan the given bytes. The next call to yyiplex() will
  * scan from a @e copy of @a bytes.
- * @param yybytes the byte buffer to scan
+ * @param yybytes the mule_byte buffer to scan
  * @param _yybytes_len the number of bytes in the buffer pointed to by @a bytes.
  *
  * @return the newly allocated buffer state object.

@@ -79,7 +79,7 @@ class CPreciseRateCounter {
 				uint64_t target_time = cur_time - timespan;
 				while (cur_time > target_time) {
 					m_tick_history.push_front(cur_time);
-					m_byte_history.push_front(0);
+					m_mule_byte_history.push_front(0);
 					cur_time -= 100;	// default update period
 				}
 				m_tick_history.push_front(cur_time);
@@ -128,7 +128,7 @@ class CPreciseRateCounter {
 
  protected:
 
-	std::deque<uint32>	m_byte_history;
+	std::deque<uint32>	m_mule_byte_history;
 	std::deque<uint64>	m_tick_history;
 	uint32_t	m_timespan;
 	uint32_t	m_total;

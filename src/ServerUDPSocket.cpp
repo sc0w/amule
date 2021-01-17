@@ -60,12 +60,12 @@ CServerUDPSocket::CServerUDPSocket(amuleIPV4Address &address, const CProxyData *
 }
 
 
-void CServerUDPSocket::OnPacketReceived(uint32 serverip, uint16 serverport, byte* buffer, size_t length)
+void CServerUDPSocket::OnPacketReceived(uint32 serverip, uint16 serverport, mule_byte* buffer, size_t length)
 {
 	wxCHECK_RET(length >= 2, wxT("Invalid packet."));
 
 	size_t nPayLoadLen = length;
-	byte* pBuffer = buffer;
+	mule_byte* pBuffer = buffer;
 	CServer* pServer = theApp->serverlist->GetServerByIPUDP(serverip, serverport, true);
 	if (pServer && thePrefs::IsServerCryptLayerUDPEnabled() &&
 		((pServer->GetServerKeyUDP() != 0 && pServer->SupportsObfuscationUDP()) || (pServer->GetCryptPingReplyPending() && pServer->GetChallenge() != 0)))
@@ -238,7 +238,7 @@ void CServerUDPSocket::ProcessPacket(CMemFile& packet, uint8 opcode, uint32 ip, 
 					// eserver 16.45+ supports a new OP_SERVER_DESC_RES answer, if the OP_SERVER_DESC_REQ contains a uint32
 					// challenge, the server returns additional info with OP_SERVER_DESC_RES. To properly distinguish the
 					// old and new OP_SERVER_DESC_RES answer, the challenge has to be selected carefully. The first 2 bytes
-					// of the challenge (in network byte order) MUST NOT be a valid string-len-int16!
+					// of the challenge (in network mule_byte order) MUST NOT be a valid string-len-int16!
 					CPacket* sendpacket = new CPacket(OP_SERVER_DESC_REQ, 4, OP_EDONKEYPROT);
 					uint32 uDescReqChallenge = ((uint32)GetRandomUint16() << 16) + INV_SERV_DESC_LEN; // 0xF0FF = an 'invalid' string length.
 					update->SetDescReqChallenge(uDescReqChallenge);
@@ -263,7 +263,7 @@ void CServerUDPSocket::ProcessPacket(CMemFile& packet, uint8 opcode, uint32 ip, 
 				// new packet: <challenge 4><taglist>
 				//
 				// NOTE: To properly distinguish between the two packets which are both useing the same opcode...
-				// the first two bytes of <challenge> (in network byte order) have to be an invalid <name_len> at least.
+				// the first two bytes of <challenge> (in network mule_byte order) have to be an invalid <name_len> at least.
 
 				uint16 Len = packet.ReadUInt16();
 
@@ -365,7 +365,7 @@ void CServerUDPSocket::SendPacket(CPacket* packet, CServer* host, bool delPacket
 	// We might need to encrypt the packet for this server.
 	if (!rawpacket && thePrefs::IsServerCryptLayerUDPEnabled() && host->GetServerKeyUDP() != 0 && host->SupportsObfuscationUDP()) {
 		uint16 uRawPacketSize = packet->GetPacketSize() + 2;
-		byte* pRawPacket = new byte[uRawPacketSize];
+		mule_byte* pRawPacket = new mule_byte[uRawPacketSize];
 		memcpy(pRawPacket, packet->GetUDPHeader(), 2);
 		memcpy(pRawPacket + 2, packet->GetDataBuffer(), packet->GetPacketSize());
 

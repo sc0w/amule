@@ -42,7 +42,7 @@
 
 	- Additional Comments:
 		- For obvious reasons the UDP handshake is actually no handshake. If a different Encryption method (or better a different Key) is to be used this has to be negotiated in a TCP connection
-		- SemiRandomNotProtocolMarker is a Byte which has a value unequal any Protocol header byte. This is a compromise, turning in complete randomness (and nice design) but gaining a lower CPU usage
+		- SemiRandomNotProtocolMarker is a Byte which has a value unequal any Protocol header mule_byte. This is a compromise, turning in complete randomness (and nice design) but gaining a lower CPU usage
 		- Kad/Ed2k Marker are only indicators, which possibility could be tried first, and should not be trusted
 
 ****************************** Server Packets
@@ -66,7 +66,7 @@
 
 	- Additional Comments:
 		- For obvious reasons the UDP handshake is actually no handshake. If a different Encryption method (or better a different Key) is to be used this has to be negotiated in a TCP connection
-		- SemiRandomNotProtocolMarker is a Byte which has a value unequal any Protocol header byte. This is a compromise, turning in complete randomness (and nice design) but gaining a lower CPU usage
+		- SemiRandomNotProtocolMarker is a Byte which has a value unequal any Protocol header mule_byte. This is a compromise, turning in complete randomness (and nice design) but gaining a lower CPU usage
 
 ****************************** KAD Packets
 
@@ -86,7 +86,7 @@
 
 	- Additional Comments:
 		- For obvious reasons the UDP handshake is actually no handshake. If a different Encryption method (or better a different Key) is to be used this has to be negotiated in a TCP connection
-		- SemiRandomNotProtocolMarker is a Byte which has a value unequal any Protocol header byte. This is a compromise, turning in complete randomness (and nice design) but gaining a lower CPU usage
+		- SemiRandomNotProtocolMarker is a Byte which has a value unequal any Protocol header mule_byte. This is a compromise, turning in complete randomness (and nice design) but gaining a lower CPU usage
 		- Kad/Ed2k Marker are only indicators, which possibility could be tried first, and should not be trusted
 */
 
@@ -309,7 +309,7 @@ int CEncryptedDatagramSocket::EncryptSendClient(uint8_t **buf, int bufLen, const
 
 	sendbuffer.SetKey(md5, true);
 
-	// create the semi random byte encryption header
+	// create the semi random mule_byte encryption header
 	uint8_t semiRandomNotProtocolMarker = 0;
 	int i;
 	for (i = 0; i < 128; i++) {
@@ -444,7 +444,7 @@ int CEncryptedDatagramSocket::EncryptSendServer(uint8_t** ppbyBuf, int nBufLen, 
 	CRC4EncryptableBuffer sendbuffer;
 	sendbuffer.SetKey(md5, true);
 
-	// create the semi random byte encryption header
+	// create the semi random mule_byte encryption header
 	uint8_t bySemiRandomNotProtocolMarker = 0;
 	int i;
 

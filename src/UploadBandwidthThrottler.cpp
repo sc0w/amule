@@ -294,7 +294,7 @@ void* UploadBandwidthThrottler::Entry()
 		uint32 sleepTime;
 		if (bytesToSpend < 1) {
 			// We have sent more than allowed in last cycle so we have to wait now
-			// until we can send at least 1 byte.
+			// until we can send at least 1 mule_byte.
 			sleepTime = std::max((-bytesToSpend + 1) * 1000 / allowedDataRate + 2, // add 2 ms to allow for rounding inaccuracies
 									extraSleepTime);
 		} else {

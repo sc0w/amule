@@ -195,7 +195,7 @@ void CClientCredits::Verified(uint32 dwForIP)
 		memcpy(m_pCredits->abySecureIdent, m_abyPublicKey, m_nPublicKeyLen);
 		if (GetDownloadedTotal() > 0){
 			// for security reason, we have to delete all prior credits here
-			// in order to save this client, set 1 byte
+			// in order to save this client, set 1 mule_byte
 			m_pCredits->downloaded = 1;
 			m_pCredits->uploaded = 1;
 			AddDebugLogLineN( logCredits, wxT("Credits deleted due to new SecureIdent") );
@@ -205,7 +205,7 @@ void CClientCredits::Verified(uint32 dwForIP)
 }
 
 
-bool CClientCredits::SetSecureIdent(const byte* pachIdent, uint8 nIdentLen)
+bool CClientCredits::SetSecureIdent(const mule_byte* pachIdent, uint8 nIdentLen)
 { // verified Public key cannot change, use only if there is not public key yet
 	if (MAXPUBKEYSIZE < nIdentLen || m_pCredits->nKeySize != 0 ) {
 		return false;

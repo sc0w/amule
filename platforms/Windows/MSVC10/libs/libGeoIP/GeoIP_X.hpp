@@ -3,9 +3,9 @@
 #include <stdio.h>
 #include <io.h>
 char PACKAGE_VERSION[] = "";
-ssize_t pread(int fildes, void *buf, size_t nbyte, size_t offset)
+ssize_t pread(int fildes, void *buf, size_t nmule_byte, size_t offset)
 {
 	lseek(fildes, offset, SEEK_SET);
-	return read(fildes, buf, nbyte);
+	return read(fildes, buf, nmule_byte);
 }
 #include "GeoIP.c" 

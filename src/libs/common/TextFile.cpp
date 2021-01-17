@@ -126,7 +126,7 @@ wxString CTextFile::GetNextLine(EReadTextFile flags, const wxMBConv& conv, bool*
 
 		if (!is_filtered) {
 			// NB: The majority of the time spent by this function is
-			//     spent converting the multibyte string to wide-char.
+			//     spent converting the multimule_byte string to wide-char.
 			line += conv.cMB2WC(buffer);
 
 			// Remove any newlines, carriage returns, etc.

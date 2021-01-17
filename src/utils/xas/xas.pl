@@ -10,7 +10,7 @@ IRC::print "\0035 (#amule @ irc.freenode.net)\003";
 # command that we use
 IRC::add_command_handler("xas","xas");
 
-#25.06.2005 - PleuR     : int_to_byte, ratio-fixer, fixed line 1 (is connected to online ?)
+#25.06.2005 - PleuR     : int_to_mule_byte, ratio-fixer, fixed line 1 (is connected to online ?)
 #16.12.2005 - stefanero : some kad cleanups
 #12.12.2005 - fulgas	; made kad work with xas
 #06.05.2005 - niet      : file handle change
@@ -91,7 +91,7 @@ sub xas
 		}
 	}
 
-	# total download traffic in bytes (int_to_byte *after* calculations)
+	# total download traffic in bytes (int_to_mule_byte *after* calculations)
 	my $tdl = $amulesigdata[11];
 
 	# total upload traffic in bytes
