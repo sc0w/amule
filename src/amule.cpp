@@ -1273,20 +1273,20 @@ void CamuleApp::OnFinishedHashing(CHashingEvent& evt)
 			dynamic_cast<CPartFile*>(owner)->PartFileHashFinished(result);
 		}
 	} else {
-		static uint64 mule_bytecount = 0;
+		static uint64 bytecount = 0;
 
 		if (knownfiles->SafeAddKFile(result, true)) {
 			AddDebugLogLineN(logKnownFiles,
 				CFormat(wxT("Safe adding file to sharedlist: %s")) % result->GetFileName());
 			sharedfiles->SafeAddKFile(result);
 
-			mule_bytecount += result->GetFileSize();
+			bytecount += result->GetFileSize();
 			// If we have added files with a total size of ~3000mb
-			if (mule_bytecount >= wxULL(3145728000)) {
+			if (bytecount >= wxULL(3145728000)) {
 				AddDebugLogLineN(logKnownFiles, wxT("Failsafe for crash on file hashing creation"));
 				if ( m_app_state != APP_STATE_SHUTTINGDOWN ) {
 					knownfiles->Save();
-					mule_bytecount = 0;
+					bytecount = 0;
 				}
 			}
 		} else {

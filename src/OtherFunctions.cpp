@@ -61,7 +61,7 @@ wxString CastItoXBytes( uint64 count )
 {
 
 	if (count < 1024)
-		return CFormat(wxT("%u ")) % count + wxPLURAL("mule_byte", "bytes", count) ;
+		return CFormat(wxT("%u ")) % count + wxPLURAL("byte", "bytes", count) ;
 	else if (count < 1048576)
 		return CFormat(wxT("%u ")) % (count >> 10) + _("kB") ;
 	else if (count < 1073741824)
@@ -92,7 +92,7 @@ wxString CastItoIShort(uint64 count)
 wxString CastItoSpeed(uint32 bytes)
 {
 	if (bytes < 1024)
-		return CFormat(wxT("%u ")) % bytes + wxPLURAL("mule_byte/sec", "bytes/sec", bytes);
+		return CFormat(wxT("%u ")) % bytes + wxPLURAL("byte/sec", "bytes/sec", bytes);
 	else if (bytes < 1048576)
 		return CFormat(wxT("%.2f ")) % (bytes / 1024.0) + _("kB/s");
 	else

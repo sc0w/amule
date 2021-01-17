@@ -358,7 +358,7 @@ void CKnownFile::SetFileSize(uint64 nFileSize)
 	//Hash[  1]: 31D6CFE0D16AE931B73C59D7E0C089C0	*special part hash*
 	//
 	//
-	//File size: 1*PARTSIZE + 1 mule_byte
+	//File size: 1*PARTSIZE + 1 byte
 	//File hash: 2F620AE9D462CBB6A59FE8401D2B3D23
 	//Nr. hashs: 2
 	//Hash[  0]: 121795F0BEDE02DDC7C5426D0995F53F
@@ -382,7 +382,7 @@ void CKnownFile::SetFileSize(uint64 nFileSize)
 	//Hash[  3]: 31D6CFE0D16AE931B73C59D7E0C089C0	*special part hash*
 	//
 	//
-	//File size: 3*PARTSIZE + 1 mule_byte
+	//File size: 3*PARTSIZE + 1 byte
 	//File hash: 797ED552F34380CAFF8C958207E40355
 	//Nr. hashs: 4
 	//Hash[  0]: FC7FD02CCD6987DCF1421F4C0AF94FB8

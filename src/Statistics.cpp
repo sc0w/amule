@@ -69,7 +69,7 @@ void CPreciseRateCounter::CalculateRate(uint64_t now)
 	wxMutexLocker lock(m_mutex);
 
 	m_total += m_tmp_sum;
-	m_mule_byte_history.push_back(m_tmp_sum);
+	m_byte_history.push_back(m_tmp_sum);
 	m_tick_history.push_back(now);
 	m_tmp_sum = 0;
 
@@ -77,17 +77,17 @@ void CPreciseRateCounter::CalculateRate(uint64_t now)
 
 	// Checking maximal timespan, but make sure not to remove
 	// the extra node in m_tick_history.
-	while (timespan > m_timespan && !m_mule_byte_history.empty()) {
-		m_total -= m_mule_byte_history.front();
-		m_mule_byte_history.pop_front();
+	while (timespan > m_timespan && !m_byte_history.empty()) {
+		m_total -= m_byte_history.front();
+		m_byte_history.pop_front();
 		m_tick_history.pop_front();
 		timespan = now - m_tick_history.front();
 	}
 
 	// Count rate/average
 	if (m_count_average) {
-		if (!m_mule_byte_history.empty()) {
-			m_rate = m_total / (double)m_mule_byte_history.size();
+		if (!m_byte_history.empty()) {
+			m_rate = m_total / (double)m_byte_history.size();
 		}
 	} else {
 		if (timespan > 0) {
@@ -403,10 +403,10 @@ void CStatistics::RecordHistory()
 	// running average computations, use differences (delta bytes/ delta time), and
 	// for long uptimes the difference between two timestamps can lose too much
 	// accuracy because the large mantissa causes less significant bits to be dropped
-	// (same for the difference between two cumulative mule_byte counts).  [We don't store
+	// (same for the difference between two cumulative byte counts).  [We don't store
 	// these values as integers because they will be used in floating point calculations,
 	// and we want to perform the conversion only once).  Therefore timestamps and
-	// Kmule_byte counts are stored in the history as doubles, while computed values use
+	// Kbyte counts are stored in the history as doubles, while computed values use
 	// float (to save space and execution time).
 
 /*
@@ -619,7 +619,7 @@ void CStatistics::ComputeAverages(
 
 	runningAvg->m_timespan = avgTime * 1000;
 	runningAvg->m_tick_history.clear();
-	runningAvg->m_mule_byte_history.clear();
+	runningAvg->m_byte_history.clear();
 	runningAvg->m_total = 0;
 	runningAvg->m_tmp_sum = 0;
 
@@ -649,7 +649,7 @@ void CStatistics::ComputeAverages(
 				wxCHECK_RET(false, wxT("ComputeAverages called with unsupported graph type."));
 			}
 
-			runningAvg->m_mule_byte_history.push_front(value);
+			runningAvg->m_byte_history.push_front(value);
 			runningAvg->m_total += value;
 		} else {
 			break;

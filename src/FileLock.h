@@ -91,7 +91,7 @@ private:
 
 	/** Locks or unlocks the lock-file, returning true on success. */
 	bool SetLock(bool doLock) {
-		// lock/unlock first mule_byte in the file
+		// lock/unlock first byte in the file
 		OVERLAPPED ov;
 		ov.Offset = ov.OffsetHigh = 0;
 		BOOL ret;

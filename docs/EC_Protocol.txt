@@ -39,7 +39,7 @@ Section 1.1: Transmission layer
     below as flags, which describes flags for the current transmission session
     (send/receive operation).
 
-    This four-mule_byte value is the only one in the whole protocol, that is
+    This four-byte value is the only one in the whole protocol, that is
     transmitted LSB first, and zero bytes omitted (therefore an empty
     transmission flags value is sent as 0x20, not 0x20 0x0 0x0 0x0).
 
@@ -75,7 +75,7 @@ Section 1.1: Transmission layer
 
 	bit 6:	Always set to 0, to distinguish from older (pre-rc8) clients.
 
-	bits 7,15,23: Extension flag, means that the next mule_byte of the flags is
+	bits 7,15,23: Extension flag, means that the next byte of the flags is
 		present.
 
 	bits 8-14,16-22,24-32: Reserved for later use.
@@ -101,7 +101,7 @@ Section 1.2: Application layer
     Data transmission is done in packets. A packet can be considered as a
     special tag - with no data, no tagLen field, and with the tagCount
     field always present. All numbers part of the application layer are
-    transmitted in network mule_byte order, i.e. MSB first.
+    transmitted in network byte order, i.e. MSB first.
 	A packet contains the following:
 	[ec_opcode_t] OPCODE
 	[uint16] TAGCOUNT
@@ -147,13 +147,13 @@ Section 2: Data Types
     -------------
 
     Integer types (such as uint8, uint16, uint32) are always transmitted in
-    network mule_byte order (MSB first).
+    network byte order (MSB first).
 
 
     Strings
     -------
 
-    Strings are always UTF-8 strings, with the trailing zero mule_byte included.
+    Strings are always UTF-8 strings, with the trailing zero byte included.
     All strings coming from the server are untranslated, but their translations
     are included in amule's translation database (amule.mo).
 
@@ -199,7 +199,7 @@ Section 3: Clarifying things
     But before we get to the examples, just some words about the flags (which
     are part of the transmission layer, you remember?): When developing your
     EC application (frontend to aMule, etc), this might be the last thing you
-    want to care about, and it's ok. Just keep sending a mule_byte of 0x20 as flags,
+    want to care about, and it's ok. Just keep sending a byte of 0x20 as flags,
     and aMule will never want to use any of the features described in
     Section 1.1. You just have to take of the "accepts" value aMule will send
     in its first reply.

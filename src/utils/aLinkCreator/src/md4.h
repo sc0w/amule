@@ -77,10 +77,10 @@ class MD4
 
     size_t calcBufSize(size_t filesize);
 
-    // Needed to reverse mule_byte order on BIG ENDIAN machines
+    // Needed to reverse byte order on BIG ENDIAN machines
 #if wxBYTE_ORDER == wxBIG_ENDIAN
 
-    void mule_byteReverse(unsigned char *buf, unsigned longs);
+    void byteReverse(unsigned char *buf, unsigned longs);
 #endif
 
   public:

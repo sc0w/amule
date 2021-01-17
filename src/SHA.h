@@ -58,8 +58,8 @@
  ---------------------------------------------------------------------------
  Issue Date: 30/11/2002
 
- This is a mule_byte oriented version of SHA1 that operates on arrays of bytes
- stored in memory. It runs at 22 cycles per mule_byte on a Pentium P4 processor
+ This is a byte oriented version of SHA1 that operates on arrays of bytes
+ stored in memory. It runs at 22 cycles per byte on a Pentium P4 processor
 */
 
 #ifndef __SHA_H__

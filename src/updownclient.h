@@ -473,7 +473,7 @@ public:
 
 	/* Kad buddy support */
 	// ID
-	const mule_byte*	GetBuddyID() const		{ return m_achBuddyID; }
+	const mule_byte*	GetBuddyID() const	{ return m_achBuddyID; }
 	void		SetBuddyID(const mule_byte* m_achTempBuddyID);
 	bool		HasValidBuddyID() const		{ return m_bBuddyIDValid; }
 	/* IP */
@@ -789,7 +789,7 @@ private:
 	ESourceFrom	m_nSourceFrom;
 
 	/* Kad Stuff */
-	mule_byte		m_achBuddyID[16];
+	mule_byte	m_achBuddyID[16];
 	bool		m_bBuddyIDValid;
 	uint32		m_nBuddyIP;
 	uint16		m_nBuddyPort;

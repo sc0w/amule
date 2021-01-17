@@ -1777,7 +1777,7 @@ void php_run_func_call(PHP_EXP_NODE *node, PHP_VALUE_NODE *result)
 /*
  * Theoretically speaking this function must run on generated code. On the
  * practical side - I need it to debug syntax tree generation. Later, it can
- * be changes to generate code for some kind of mule_bytecode for stack machine
+ * be changes to generate code for some kind of bytecode for stack machine
  */
 int php_execute(PHP_SYN_NODE *node, PHP_VALUE_NODE *result)
 {

@@ -180,7 +180,7 @@ void CEncryptedStreamSocket::SetConnectionEncryption(bool bEnabled, const uint8_
 /* Internals, common to base class */
 
 // unfortunately sending cannot be made transparent for the derived class, because of WSA_WOULDBLOCK
-// together with the fact that each mule_byte must pass the keystream only once
+// together with the fact that each byte must pass the keystream only once
 int CEncryptedStreamSocket::Write(const void* lpBuf, uint32_t nBufLen)
 {
 	//printf("Starting write for %s\n", (const char*) unicode2char(GetPeer()));
@@ -697,7 +697,7 @@ int CEncryptedStreamSocket::SendNegotiatingData(const void* lpBuf, uint32_t nBuf
 		}
 
 		if (nBufLen - nStartCryptFromByte > 0) {
-			//printf("Crypting negotiation data on %s starting on mule_byte %i\n", (const char*) unicode2char(GetPeer()), nStartCryptFromByte);
+			//printf("Crypting negotiation data on %s starting on byte %i\n", (const char*) unicode2char(GetPeer()), nStartCryptFromByte);
 			//DumpMem(lpBuf, nBufLen, wxT("Pre-encryption:"));
 			m_pfiSendBuffer.RC4Crypt((uint8*)lpBuf + nStartCryptFromByte, pBuffer + nStartCryptFromByte, nBufLen - nStartCryptFromByte);
 			//DumpMem(pBuffer, nBufLen, wxT("Post-encryption:"));

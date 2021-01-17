@@ -509,7 +509,7 @@ void CSearch::StorePacket()
 			} else {
 				if (m_searchTermsDataSize == 0) {
 					searchTerms.WriteUInt8(0);
-					// We send this extra mule_byte to flag we handle large files.
+					// We send this extra byte to flag we handle large files.
 					searchTerms.WriteUInt8(0);
 				} else {
 					// Set to 2 to flag we handle large files.

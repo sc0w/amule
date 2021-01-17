@@ -113,13 +113,13 @@ public:
 			bool foundFalse = false;
 			uint32 lastByte = m_bytes;
 			if (m_bits & 7) {
-				// uneven: check bits of last mule_byte individually
+				// uneven: check bits of last byte individually
 				lastByte--;
 				for (uint32 i = m_bits & 0xfffffff8; !foundFalse && i < m_bits; i++) {
 					foundFalse = !get(i);
 				}
 			}
-			// check mule_bytewise
+			// check bytewise
 			for (uint32 i = 0; !foundFalse && i < lastByte; i++) {
 				foundFalse = m_vector[i] != 0xff;
 			}

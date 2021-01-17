@@ -275,7 +275,7 @@ void test_taglist_serialization(TagPtrList& taglist, mule_byte* packet, uint64 p
 	}
 
 	for (uint64 i = 0; i < packet_len; i++) {
-		CONTEXT(wxString::Format(wxT("Comparing serialized mule_byte #%") wxLongLongFmtSpec wxT("u"), i));
+		CONTEXT(wxString::Format(wxT("Comparing serialized byte #%") wxLongLongFmtSpec wxT("u"), i));
 
 		ASSERT_EQUALS(packet[i], buf[i]);
 	}
@@ -421,7 +421,7 @@ void check_single_kad_tag(mule_byte* packet, size_t packet_len, T tagName, V tag
 
 		newbuf.Seek(0, wxFromStart);
 		for (size_t i = 0; i < packet_len; i++) {
-			CONTEXT(wxString::Format(wxT("Comparing mule_byte #%d"), static_cast<int>(i)));
+			CONTEXT(wxString::Format(wxT("Comparing byte #%d"), static_cast<int>(i)));
 
 			ASSERT_EQUALS(packet[i], newbuf.ReadUInt8());
 		}

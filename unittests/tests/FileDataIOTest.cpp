@@ -340,7 +340,7 @@ public:
 		CFileDataIO* file = this->m_predefFile;
 
 		for (size_t j = 0; j < TEST_LENGTH + 1 - SIZE; ++j) {
-			// Clear before, after and at the target mule_byte(s)
+			// Clear before, after and at the target byte(s)
 			for (int t = -static_cast<int>(SIZE); t < (int)(2*SIZE); ++t) {
 				if ((j + t) < TEST_LENGTH && ((int)j + t) >= 0) {
 					file->Seek(j + t, wxFromStart);
@@ -361,7 +361,7 @@ public:
 			RW::writeValue(file, RW::genValue(j));
 			ASSERT_EQUALS(j + SIZE, file->GetPosition());
 
-			// Check before, after and at the target mule_byte
+			// Check before, after and at the target byte
 			for (int t = -static_cast<int>(SIZE); t < (int)(2*SIZE); ++t) {
 				if ((j + t) < TEST_LENGTH && ((int)j + t) >= 0) {
 					if (t) {

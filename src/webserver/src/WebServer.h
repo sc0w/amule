@@ -510,10 +510,10 @@ class CDynPngImage : public virtual CAnyImage {
 		virtual unsigned char *RequestData(int &size);
 
 	protected:
-		png_mule_bytep m_img_data;
-		png_mule_bytep *m_row_ptrs;
+		png_bytep m_img_data;
+		png_bytep *m_row_ptrs;
 
-		static void png_write_fn(png_structp png_ptr, png_mule_bytep data, png_size_t length);
+		static void png_write_fn(png_structp png_ptr, png_bytep data, png_size_t length);
 
 };
 
@@ -593,7 +593,7 @@ class CStatsCollection {
 // Easiest way to represt numbers: 7-segments model
 //
 class CNumImageMask {
-		png_mule_bytep *m_row_mask_ptrs;
+		png_bytep *m_row_mask_ptrs;
 		int m_width, m_height;
 		int m_v_segsize, m_h_segsize;
 
@@ -607,7 +607,7 @@ class CNumImageMask {
 		CNumImageMask(int number, int width, int height);
 		~CNumImageMask();
 
-		void Apply(png_mule_bytep *image, int offx, int offy);
+		void Apply(png_bytep *image, int offx, int offy);
 };
 
 class CDynStatisticImage : public virtual CDynPngImage {
@@ -629,8 +629,8 @@ class CDynStatisticImage : public virtual CDynPngImage {
 		//
 		// Prepared background
 		//
-		png_mule_bytep m_background;
-		png_mule_bytep *m_row_bg_ptrs;
+		png_bytep m_background;
+		png_bytep *m_row_bg_ptrs;
 
 		void DrawImage();
 	public:

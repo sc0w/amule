@@ -43,10 +43,10 @@
 #include "bithelp.h"
 
 
-/// BIG ENDIAN mule_byte reversing
+/// BIG ENDIAN byte reversing
 #if wxBYTE_ORDER == wxBIG_ENDIAN
 // Note: this code is harmless on little-endian machines.
-void MD4::mule_byteReverse(unsigned char *buf, unsigned longs)
+void MD4::byteReverse(unsigned char *buf, unsigned longs)
 {
   do
     {
@@ -59,7 +59,7 @@ void MD4::mule_byteReverse(unsigned char *buf, unsigned longs)
   while (--longs);
 }
 #else
-#define mule_byteReverse(buf, len)	do { } while (0)
+#define byteReverse(buf, len)	do { } while (0)
 #endif
 
 /// Start MD4 accumulation.
@@ -100,17 +100,17 @@ void MD4::MD4Update(struct MD4Context *ctx, unsigned char const *buf,
           return;
         }
       memcpy(p, buf, t);
-      mule_byteReverse(ctx->in, 16);
+      byteReverse(ctx->in, 16);
       MD4Transform(ctx->buf, (uint32_t *) ctx->in);
       buf += t;
       len -= t;
     }
 
-  // Process data in 64-mule_byte chunks
+  // Process data in 64-byte chunks
   while (len >= 64)
     {
       memcpy(ctx->in, buf, 64);
-      mule_byteReverse(ctx->in, 16);
+      byteReverse(ctx->in, 16);
       MD4Transform(ctx->buf, (uint32_t *) ctx->in);
       buf += 64;
       len -= 64;
@@ -121,7 +121,7 @@ void MD4::MD4Update(struct MD4Context *ctx, unsigned char const *buf,
 }
 
 
-///  Final wrapup - pad to 64-mule_byte boundary with the bit pattern
+///  Final wrapup - pad to 64-byte boundary with the bit pattern
 ///  1 0* (64-bit count of bits processed, MSB-first)
 void MD4::MD4Final(struct MD4Context *ctx, unsigned char* digest)
 {
@@ -132,7 +132,7 @@ void MD4::MD4Final(struct MD4Context *ctx, unsigned char* digest)
   count = (ctx->bits[0] >> 3) & 0x3F;
 
   // Set the first char of padding to 0x80.
-  //This is safe since there is always at least one mule_byte free
+  //This is safe since there is always at least one byte free
   p = ctx->in + count;
   *p++ = 0x80;
 
@@ -144,7 +144,7 @@ void MD4::MD4Final(struct MD4Context *ctx, unsigned char* digest)
     {
       // Two lots of padding:  Pad the first block to 64 bytes
       memset(p, 0, count);
-      mule_byteReverse(ctx->in, 16);
+      byteReverse(ctx->in, 16);
       MD4Transform(ctx->buf, (uint32_t *) ctx->in);
 
       // Now fill the next block with 56 bytes
@@ -155,7 +155,7 @@ void MD4::MD4Final(struct MD4Context *ctx, unsigned char* digest)
       // Pad block to 56 bytes
       memset(p, 0, count - 8);
     }
-  mule_byteReverse(ctx->in, 14);
+  byteReverse(ctx->in, 14);
 
   // Append length in bits and transform
   uint32_t * in32 = (uint32_t *) ctx->in;
@@ -163,7 +163,7 @@ void MD4::MD4Final(struct MD4Context *ctx, unsigned char* digest)
   in32[15] = ctx->bits[1];
 
   MD4Transform(ctx->buf, (uint32_t *) ctx->in);
-  mule_byteReverse((unsigned char *) ctx->buf, 4);
+  byteReverse((unsigned char *) ctx->buf, 4);
 
   if (digest!=NULL)
     {

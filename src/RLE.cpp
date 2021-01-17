@@ -123,7 +123,7 @@ const uint8 *RLE_Data::Decode(const uint8 *buff, int len)
 				j += seqLen;
 				i += 3;
 			} else {
-				// This is a single mule_byte.
+				// This is a single byte.
 				if (j < m_len) {
 					decBuf[j] = buff[i];
 				}
@@ -180,7 +180,7 @@ const uint8 * RLE_Data::Encode(const uint8 *data, int inlen, int &outlen, bool &
 	//
 	// now RLE
 	//
-	// In worst case 2-mule_byte sequence is encoded as 3. So, data can grow by 50%.
+	// In worst case 2-byte sequence is encoded as 3. So, data can grow by 50%.
 	uint8 * enc_buff = new uint8[m_len * 3/2 + 1];
 	int i = 0, j = 0;
 	while ( i != m_len ) {

@@ -884,7 +884,7 @@ bool CPartFile::SavePartFile(bool Initial)
 		for (CGapList::const_iterator it = m_gaplist.begin(); it != m_gaplist.end(); ++it) {
 			wxString tagName = CFormat(wxT(" %u")) % i_pos;
 
-			// gap start = first missing mule_byte but gap ends = first non-missing mule_byte
+			// gap start = first missing byte but gap ends = first non-missing byte
 			// in edonkey but I think its easier to user the real limits
 			tagName[0] = FT_GAPSTART;
 			CTagIntSized(tagName, it.start(),	IsLargeFile() ? 64 : 32).WriteTagToFile( &file );

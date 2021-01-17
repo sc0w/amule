@@ -94,7 +94,7 @@ public:
 	/**
 	 * Returns the next line of a readable file.
 	 *
-	 * @param conv The converter used to convert from multimule_byte to widechar.
+	 * @param conv The converter used to convert from multibyte to widechar.
 	 *
 	 * Note that GetNextLine will return an empty string if the file has reached
 	 * EOF, or if the file is closed, or not readable. However, empty lines in
@@ -106,7 +106,7 @@ public:
 	/**
 	 * Writes the line to a writable file, returning true on success.
 	 *
-	 * @param conv The converter used to convert from widechar to multimule_byte.
+	 * @param conv The converter used to convert from widechar to multibyte.
 	 */
 	bool		WriteLine(const wxString& line, const wxMBConv& conv = wxConvLibc);
 

@@ -45,7 +45,7 @@ public:
 	uint32		nLastSeen;
 	uint16		nReserved3;
 	uint8		nKeySize;
-	mule_byte		abySecureIdent[MAXPUBKEYSIZE];
+	mule_byte	abySecureIdent[MAXPUBKEYSIZE];
 };
 
 enum EIdentState{

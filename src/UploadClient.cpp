@@ -206,7 +206,7 @@ void CUpDownClient::CreateNextBlockPackage()
 			// correctly treated as plain CKnownFile.
 			CPartFile* srcPartFile = srcfile->IsPartFile() ? static_cast<CPartFile*>(srcfile) : NULL;
 
-			// THIS EndOffset points BEHIND the last mule_byte requested
+			// THIS EndOffset points BEHIND the last byte requested
 			// (other than the offsets used in the PartFile code)
 			if (currentblock->EndOffset > srcfile->GetFileSize()) {
 				throw wxString(CFormat(wxT("Asked for data up to %d beyond end of file (%d)"))

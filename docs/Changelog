@@ -151,7 +151,7 @@ Version 2.3.1 - The "unobvious evil date" version.
 		* Drop assumption that last search keyword is a filename
 		  extension if length == 3
 		* Instead of counting unicode characters in a Kad search now we
-		  use the UTF-8 mule_byte count to determine whether the keyword is
+		  use the UTF-8 byte count to determine whether the keyword is
 		  allowed or not
 		* Use actual page size in mmap calls instead of a randomly
 		  selected number
@@ -1121,7 +1121,7 @@ Version 2.2.1 - The "Excuse me, have you seen my 2.2.0 release anywhere?" versio
 		* Applied Bas Zoetekouw's patch for debian bug #350396:
 		  "amule depletes entropy pool".
 		* Implemented IP2Country using GeoIP.
-		* When converting from multimule_byte to wide characters,
+		* When converting from multibyte to wide characters,
 		  ConvAmuleBrokenFileNames now tries UTF-8 first. If this
 		  fails, then it tries ISO-8859-1.
 		* New directory based skin support, reworked Trevino's patch.
@@ -4018,7 +4018,7 @@ Version 2.0.0rc8 - The "last rc" version.
 		* Fixed: Setting "A4AF to others" works now.
 		* Fixed: Server names sorting now differences between names
 		  and IPs.
-		* Fixed: Last mule_byte is now drawn in bar progress.
+		* Fixed: Last byte is now drawn in bar progress.
 		* Fixed: Stop button now working after second global search
 		  and another hidden bug in global searches' progress bar.
 		  (reported by ecforum)
@@ -4690,7 +4690,7 @@ Version 2.0.0rc6 - The "We're so EVIL that we make you lose a sock in every pair
 		  hundreds. There is still room for improovement here.
 		* Fixed a bug in SafeFile.cpp. wxString.Length() returns the
 		  number of codes in the string, which is less than or equal
-		  to the number of bytes in a multimule_byte encoded string. This way,
+		  to the number of bytes in a multibyte encoded string. This way,
 		  amule will also not crash with locale search strings like korean,
 		  japanese and chinese.
 		* Several amuleweb/ExternalConn bug fixes. Now the
