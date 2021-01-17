@@ -48,7 +48,7 @@ Unicode2CharBuf unicode2char(const wxChar* s)
 	}
 	// Failed. Try to convert as much as possible.
 	size_t len = wxStrlen(s);
-	size_t maxlen = len * 4;		// Allow for an encoding of up to 4 mule_byte per char.
+	size_t maxlen = len * 4;		// Allow for an encoding of up to 4 byte per char.
 	wxCharBuffer buf(maxlen + 1);	// This is wasteful, but the string is used temporary anyway.
 	char * data = buf.data();
 	for (size_t i = 0, pos = 0; i < len; i++) {

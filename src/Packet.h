@@ -48,10 +48,10 @@ public:
 
 	~CPacket();
 
-	mule_byte*			GetHeader();
-	mule_byte*			GetUDPHeader();
-	mule_byte*			GetPacket();
-	mule_byte*			DetachPacket();
+	mule_byte*		GetHeader();
+	mule_byte*		GetUDPHeader();
+	mule_byte*		GetPacket();
+	mule_byte*		DetachPacket();
 	uint32			GetRealPacketSize() const	{ return size + 6; }
 	static uint32		GetPacketSizeFromHeader(const mule_byte* rawHeader);
 	bool			IsSplitted()		{ return m_bSplitted; }
@@ -82,10 +82,10 @@ private:
 	bool		m_bLastSplitted;
 	bool		m_bPacked;
 	bool		m_bFromPF;
-	mule_byte		head[6];
-	mule_byte*		tempbuffer;
-	mule_byte*		completebuffer;
-	mule_byte*		pBuffer;
+	mule_byte	head[6];
+	mule_byte*	tempbuffer;
+	mule_byte*	completebuffer;
+	mule_byte*	pBuffer;
 };
 
 #endif // PACKET_H
