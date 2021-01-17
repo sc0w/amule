@@ -45,7 +45,7 @@ public:
 	CClientCredits* GetCredit(const CMD4Hash& key);
 	void	Process();
 	uint8	GetPubKeyLen() const			{return m_nMyPublicKeyLen;}
-	const mule_byte*	GetPublicKey() const		{return m_abyMyPublicKey;}
+	const mule_byte*	GetPublicKey() const	{return m_abyMyPublicKey;}
 	bool	CryptoAvailable() const;
 	void	SaveList();
 protected:
@@ -61,7 +61,7 @@ private:
 	uint32		m_nLastSaved;
 	// A void* to avoid having to include the large CryptoPP.h file
 	void*		m_pSignkey;
-	mule_byte		m_abyMyPublicKey[80];
+	mule_byte	m_abyMyPublicKey[80];
 	uint8		m_nMyPublicKeyLen;
 };
 
