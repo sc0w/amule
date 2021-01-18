@@ -30,6 +30,7 @@ requires:
     - libwxgtk3.0-dev #sid
 #    - libwxgtk3.0-gtk3-dev
     - pastebinit
+    - wget
     - wx3.0-i18n
     - zlib1g-dev
 
