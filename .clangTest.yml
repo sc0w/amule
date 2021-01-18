@@ -57,6 +57,8 @@ build_scripts:
 #  - mkdir ../clang
 #  - cp -dpR . ../clang
 #  - cd ../clang
+  - wget http://snapshot.debian.org/archive/debian/20201228T203251Z/pool/main/a/autoconf/autoconf_2.70-1_all.deb
+  - dpkg -i *deb
   - NOCONFIGURE=1 ./autogen.sh
   - scan-build $CHECKERS ./configure --prefix=/usr --mandir=\$${prefix}/share/man --infodir=\$${prefix}/share/info --disable-dependency-tracking --disable-ccache --disable-debug --enable-amule-daemon --enable-amulecmd --enable-ed2k --enable-webserver --enable-amule-gui --enable-cas --enable-wxcas --enable-alc --enable-alcc --disable-embedded-crypto --enable-geoip --enable-upnp --with-denoise-level=0 --with-boost
   - scan-build $CHECKERS --keep-cc -o amule_clang_htmlreport make -j $CPU_COUNT
