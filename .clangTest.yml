@@ -62,7 +62,6 @@ build_scripts:
   - wget http://snapshot.debian.org/archive/debian/20180227T161438Z/pool/main/libc/libcrypto%2B%2B/libcrypto%2B%2B-dev_6.1.0-1_amd64.deb
   - dpkg -i libcrypto++1_6.1.0-1_amd64.deb
   - dpkg -i libcrypto++-dev_6.1.0-1_amd64.deb
-  - dpkg -l libcrypto++-dev
   - NOCONFIGURE=1 ./autogen.sh
   - scan-build $CHECKERS ./configure --prefix=/usr --mandir=\$${prefix}/share/man --infodir=\$${prefix}/share/info --disable-dependency-tracking --disable-ccache --disable-debug --enable-amule-daemon --enable-amulecmd --enable-ed2k --enable-webserver --enable-amule-gui --enable-cas --enable-wxcas --enable-alc --enable-alcc --disable-embedded-crypto --enable-geoip --enable-upnp --with-denoise-level=0 --with-boost
   - scan-build $CHECKERS --keep-cc -o amule_clang_htmlreport make -j $CPU_COUNT
