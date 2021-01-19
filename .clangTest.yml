@@ -58,10 +58,10 @@ build_scripts:
 #  - mkdir ../clang
 #  - cp -dpR . ../clang
 #  - cd ../clang
-  - wget http://ftp.us.debian.org/debian/pool/main/libc/libcrypto++/libcrypto++8_8.4.0-1_amd64.deb
-  - wget http://ftp.us.debian.org/debian/pool/main/libc/libcrypto++/libcrypto++-dev_8.4.0-1_amd64.deb
-  - dpkg -i libcrypto++8_8.4.0-1_amd64.deb
-  - dpkg -i libcrypto++-dev_8.4.0-1_amd64.deb
+  - wget http://snapshot.debian.org/archive/debian/20180227T161438Z/pool/main/libc/libcrypto%2B%2B/libcrypto%2B%2B1_6.1.0-1_amd64.deb
+  - wget http://snapshot.debian.org/archive/debian/20180227T161438Z/pool/main/libc/libcrypto%2B%2B/libcrypto%2B%2B-dev_6.1.0-1_amd64.deb
+  - dpkg -i libcrypto++1_6.1.0-1_amd64.deb
+  - dpkg -i libcrypto++-dev_6.1.0-1_amd64.deb
   - NOCONFIGURE=1 ./autogen.sh
   - scan-build $CHECKERS ./configure --prefix=/usr --mandir=\$${prefix}/share/man --infodir=\$${prefix}/share/info --disable-dependency-tracking --disable-ccache --disable-debug --enable-amule-daemon --enable-amulecmd --enable-ed2k --enable-webserver --enable-amule-gui --enable-cas --enable-wxcas --enable-alc --enable-alcc --disable-embedded-crypto --enable-geoip --enable-upnp --with-denoise-level=0 --with-boost
   - scan-build $CHECKERS --keep-cc -o amule_clang_htmlreport make -j $CPU_COUNT
