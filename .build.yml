@@ -31,6 +31,7 @@ requires:
 #   - libwxgtk3.0-dev #buster
     - libwxgtk3.0-gtk3-dev
     - pastebinit
+    - wget
     - wx3.0-i18n
     - zlib1g-dev
 
@@ -45,6 +46,9 @@ before_scripts:
   - cppcheck-htmlreport --title="$TITLECPPCHECK" --file=cppcheck.xml --report-dir=cppcheck-htmlreport
 
 build_scripts:
+  - wget http://ftp.us.debian.org/debian/pool/main/a/autoconf/autoconf_2.69-14_all.deb
+  - dpkg -i *deb
+
   - export TITLESCANBUILD="${REPO_NAME} (clang-tools `dpkg -s clang-tools|grep -i version|cut -d " " -f 2`) - scan-build results"
   - mkdir html-report
   - cppcheck --enable=warning,style,performance,portability,information,missingInclude . 2>&1 | tee -a ./html-report/output_${TRAVIS_COMMIT}
