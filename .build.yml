@@ -65,7 +65,7 @@ build_scripts:
 #  - cd ../rootdir
 
 after_scripts:
-#  - make check
+  - make check
 #  - make distcheck
   - make clean
   - if [ -f "gen-index" ]; then ./gen-index -l 20; fi
