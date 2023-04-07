@@ -5,34 +5,26 @@ requires:
   debian:
     # Useful URL: https://github.com/mate-desktop/debian-packages
     # Useful URL: https://salsa.debian.org/debian-mate-team/atril
-    - autoconf
-    - automake
-    - autotools-dev
-    - autopoint
-    - binutils-dev #make check/distcheck
-    - clang
-    - clang-tools
-    - cppcheck
-    - debhelper
-    - git
-    - kdelibs-bin #make check/distcheck
-    - libboost-dev
-    - libboost-system-dev
-    - libcrypto++-dev
-    - libgd-dev
-    - libgeoip-dev
-    - libglib2.0-dev
-    - libpng-dev
-    - libqt4-dev #make check/distcheck
-    - libqt4-dev-bin #make check/distcheck
-    - libreadline-dev
-    - libupnp-dev
-    - libwxbase3.0-dev #sid
-#   - libwxgtk3.0-dev #buster
-    - libwxgtk3.0-gtk3-dev
-    - pastebinit
-    - wx3.0-i18n
-    - zlib1g-dev
+  - aptitude
+  - expect
+  - git
+  - autoconf
+  - automake
+  - autopoint
+  - autotools-dev
+  - debhelper-compat
+  - libboost-dev
+  - libboost-system-dev
+  - libcrypto++-dev
+  - libgd-dev
+  - libgeoip-dev
+  - libglib2.0-dev
+  - libpng-dev
+  - libreadline-dev
+  - libupnp-dev
+  - libwxgtk3.2-dev
+  - wx3.2-i18n
+  - zlib1g-dev
 
 before_scripts:
   - ./html-cppcheck
