@@ -17,6 +17,7 @@ requires:
   - binutils
   - binutils-dev
   - debhelper-compat
+  - moc
   - libboost-dev
   - libboost-system-dev
   - libcrypto++-dev
