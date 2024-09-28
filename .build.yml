@@ -1,0 +1,46 @@
+##########################################################
+# THE FOLLOWING LINES IS USED BY docker-build
+##########################################################
+requires:
+  debian:
+    # Useful URL: https://github.com/mate-desktop/debian-packages
+    # Useful URL: https://salsa.debian.org/debian-mate-team/atril
+  - aptitude
+  - cppcheck
+  - clang-tools
+  - expect
+  - git
+  - autoconf
+  - automake
+  - autopoint
+  - autotools-dev
+  - expect
+  - binutils
+  - binutils-dev
+  - debhelper-compat
+  - libboost-dev
+  - libboost-system-dev
+  - libcrypto++-dev
+  - libgd-dev
+  - libgeoip-dev
+  - libglib2.0-dev
+  - libpng-dev
+  - libreadline-dev
+  - libupnp-dev
+  - libwxgtk3.2-dev
+  - qtchooser
+  - wx3.2-i18n
+  - zlib1g-dev
+
+before_scripts:
+  - ./html-cppcheck
+
+build_scripts:
+  - ./before-build
+  - export CFLAGS+=" -Wno-register"
+  - export CXXFLAGS+=" -Wno-register"
+  - ./make-amulescanbuild.sh '--prefix=/usr --mandir=\$${prefix}/share/man --infodir=\$${prefix}/share/info --disable-dependency-tracking --disable-ccache --disable-debug --enable-amule-daemon --enable-amulecmd --enable-ed2k --enable-webserver --enable-amule-gui --enable-cas --enable-wxcas --enable-alc --enable-alcc --disable-embedded-crypto --enable-geoip --enable-upnp --with-denoise-level=0 --with-boost'
+  - ./after-build
+
+after_scripts:
+  - if [ -f "gen-index" ]; then ./gen-index -l 20; fi
