@@ -1,0 +1,3 @@
+remove wxCHECK_VERSION no longer necessary
+
+and more useless code, because now wxWidgets 3.2 is required
