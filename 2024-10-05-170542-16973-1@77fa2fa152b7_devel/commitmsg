@@ -1,0 +1,7 @@
+MuleNotebook: remove deletepage workaround
+
+It isn't needed in wxWidgets 3.2
+
+It reverts the commits:
+https://github.com/amule-project/amule/commit/4c94c2d9f3be8b9068966f15aebc29b8c9b706ab
+https://github.com/amule-project/amule/commit/0f0c5c220228aea81142c7c00f73414cdb1b507a

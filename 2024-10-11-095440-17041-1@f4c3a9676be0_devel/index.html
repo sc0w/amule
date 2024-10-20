@@ -1,0 +1,716 @@
+<html>
+<head>
+<title>amule (clang-tools 1:16.0-58.1) - scan-build results</title>
+<link type="text/css" rel="stylesheet" href="scanview.css"/>
+<script src="sorttable.js"></script>
+<script language='javascript' type="text/javascript">
+function SetDisplay(RowClass, DisplayVal)
+{
+  var Rows = document.getElementsByTagName("tr");
+  for ( var i = 0 ; i < Rows.length; ++i ) {
+    if (Rows[i].className == RowClass) {
+      Rows[i].style.display = DisplayVal;
+    }
+  }
+}
+
+function CopyCheckedStateToCheckButtons(SummaryCheckButton) {
+  var Inputs = document.getElementsByTagName("input");
+  for ( var i = 0 ; i < Inputs.length; ++i ) {
+    if (Inputs[i].type == "checkbox") {
+      if(Inputs[i] != SummaryCheckButton) {
+        Inputs[i].checked = SummaryCheckButton.checked;
+        Inputs[i].onclick();
+      }
+    }
+  }
+}
+
+function returnObjById( id ) {
+    if (document.getElementById)
+        var returnVar = document.getElementById(id);
+    else if (document.all)
+        var returnVar = document.all[id];
+    else if (document.layers)
+        var returnVar = document.layers[id];
+    return returnVar;
+}
+
+var NumUnchecked = 0;
+
+function ToggleDisplay(CheckButton, ClassName) {
+  if (CheckButton.checked) {
+    SetDisplay(ClassName, "");
+    if (--NumUnchecked == 0) {
+      returnObjById("AllBugsCheck").checked = true;
+    }
+  }
+  else {
+    SetDisplay(ClassName, "none");
+    NumUnchecked++;
+    returnObjById("AllBugsCheck").checked = false;
+  }
+}
+</script>
+<!-- SUMMARYENDHEAD -->
+</head>
+<body>
+<h1>amule (clang-tools 1:16.0-58.1) - scan-build results</h1>
+
+<table>
+<tr><th>User:</th><td>root@8dee55cf5133</td></tr>
+<tr><th>Working Directory:</th><td>/rootdir</td></tr>
+<tr><th>Command Line:</th><td>make -j 5</td></tr>
+<tr><th>Clang Version:</th><td>Debian clang version 16.0.6 (27+b1)
+</td></tr>
+<tr><th>Date:</th><td>Fri Oct 11 09:54:40 2024</td></tr>
+</table>
+<h2>Bug Summary</h2><table>
+<thead><tr><td>Bug Type</td><td>Quantity</td><td class="sorttable_nosort">Display?</td></tr></thead>
+<tr style="font-weight:bold"><td class="SUMM_DESC">All Bugs</td><td class="Q">202</td><td><center><input type="checkbox" id="AllBugsCheck" onClick="CopyCheckedStateToCheckButtons(this);" checked/></center></td></tr>
+<tr><th>API</th><th colspan=2></th></tr>
+<tr><td class="SUMM_DESC">Argument with 'nonnull' attribute passed null</td><td class="Q">3</td><td><center><input type="checkbox" onClick="ToggleDisplay(this,'bt_api_argument_with_nonnull_attribute_passed_null');" checked/></center></td></tr>
+<tr><th>Logic error</th><th colspan=2></th></tr>
+<tr><td class="SUMM_DESC">Assigned value is garbage or undefined</td><td class="Q">2</td><td><center><input type="checkbox" onClick="ToggleDisplay(this,'bt_logic_error_assigned_value_is_garbage_or_undefined');" checked/></center></td></tr>
+<tr><td class="SUMM_DESC">Buffer overflow</td><td class="Q">1</td><td><center><input type="checkbox" onClick="ToggleDisplay(this,'bt_logic_error_buffer_overflow');" checked/></center></td></tr>
+<tr><td class="SUMM_DESC">Called C++ object pointer is null</td><td class="Q">3</td><td><center><input type="checkbox" onClick="ToggleDisplay(this,'bt_logic_error_called_c++_object_pointer_is_null');" checked/></center></td></tr>
+<tr><td class="SUMM_DESC">Cast from non-struct type to struct type</td><td class="Q">9</td><td><center><input type="checkbox" onClick="ToggleDisplay(this,'bt_logic_error_cast_from_non-struct_type_to_struct_type');" checked/></center></td></tr>
+<tr><td class="SUMM_DESC">Dereference of null pointer</td><td class="Q">2</td><td><center><input type="checkbox" onClick="ToggleDisplay(this,'bt_logic_error_dereference_of_null_pointer');" checked/></center></td></tr>
+<tr><td class="SUMM_DESC">Out-of-bound access</td><td class="Q">6</td><td><center><input type="checkbox" onClick="ToggleDisplay(this,'bt_logic_error_out-of-bound_access');" checked/></center></td></tr>
+<tr><td class="SUMM_DESC">Out-of-bound array access</td><td class="Q">4</td><td><center><input type="checkbox" onClick="ToggleDisplay(this,'bt_logic_error_out-of-bound_array_access');" checked/></center></td></tr>
+<tr><td class="SUMM_DESC">Use fixed address</td><td class="Q">1</td><td><center><input type="checkbox" onClick="ToggleDisplay(this,'bt_logic_error_use_fixed_address');" checked/></center></td></tr>
+<tr><th>Memory error</th><th colspan=2></th></tr>
+<tr><td class="SUMM_DESC">Double delete</td><td class="Q">1</td><td><center><input type="checkbox" onClick="ToggleDisplay(this,'bt_memory_error_double_delete');" checked/></center></td></tr>
+<tr><td class="SUMM_DESC">Memory leak</td><td class="Q">8</td><td><center><input type="checkbox" onClick="ToggleDisplay(this,'bt_memory_error_memory_leak');" checked/></center></td></tr>
+<tr><td class="SUMM_DESC">Use-after-free</td><td class="Q">3</td><td><center><input type="checkbox" onClick="ToggleDisplay(this,'bt_memory_error_use-after-free');" checked/></center></td></tr>
+<tr><th>Unix API</th><th colspan=2></th></tr>
+<tr><td class="SUMM_DESC">malloc() size overflow</td><td class="Q">2</td><td><center><input type="checkbox" onClick="ToggleDisplay(this,'bt_unix_api_malloc_size_overflow');" checked/></center></td></tr>
+<tr><th>Unused code</th><th colspan=2></th></tr>
+<tr><td class="SUMM_DESC">Dead assignment</td><td class="Q">1</td><td><center><input type="checkbox" onClick="ToggleDisplay(this,'bt_unused_code_dead_assignment');" checked/></center></td></tr>
+<tr><td class="SUMM_DESC">Dead nested assignment</td><td class="Q">2</td><td><center><input type="checkbox" onClick="ToggleDisplay(this,'bt_unused_code_dead_nested_assignment');" checked/></center></td></tr>
+<tr><td class="SUMM_DESC">Unreachable code</td><td class="Q">154</td><td><center><input type="checkbox" onClick="ToggleDisplay(this,'bt_unused_code_unreachable_code');" checked/></center></td></tr>
+</table>
+<h2>Reports</h2>
+
+<table class="sortable" style="table-layout:automatic">
+<thead><tr>
+  <td>Bug Group</td>
+  <td class="sorttable_sorted">Bug Type<span id="sorttable_sortfwdind">&nbsp;&#x25BE;</span></td>
+  <td>File</td>
+  <td>Function/Method</td>
+  <td class="Q">Line</td>
+  <td class="Q">Path Length</td>
+  <td class="sorttable_nosort"></td>
+  <!-- REPORTBUGCOL -->
+</tr></thead>
+<tbody>
+<tr class="bt_api_argument_with_nonnull_attribute_passed_null"><td class="DESC">API</td><td class="DESC">Argument with 'nonnull' attribute passed null</td><td>rootdir/src/BitVector.h</td><td class="DESC">SetBuffer</td><td class="Q">142</td><td class="Q">30</td><td><a href="report-61b2f1.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-61b2f1.html" -->
+</tr>
+<tr class="bt_api_argument_with_nonnull_attribute_passed_null"><td class="DESC">API</td><td class="DESC">Argument with 'nonnull' attribute passed null</td><td>rootdir/src/RLE.cpp</td><td class="DESC">Decode</td><td class="Q">121</td><td class="Q">13</td><td><a href="report-7b653b.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-7b653b.html" -->
+</tr>
+<tr class="bt_api_argument_with_nonnull_attribute_passed_null"><td class="DESC">API</td><td class="DESC">Argument with 'nonnull' attribute passed null</td><td>rootdir/src/RLE.cpp</td><td class="DESC">Decode</td><td class="Q">151</td><td class="Q">23</td><td><a href="report-ad96e0.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-ad96e0.html" -->
+</tr>
+<tr class="bt_logic_error_assigned_value_is_garbage_or_undefined"><td class="DESC">Logic error</td><td class="DESC">Assigned value is garbage or undefined</td><td>rootdir/src/RLE.cpp</td><td class="DESC">Decode</td><td class="Q">148</td><td class="Q">27</td><td><a href="report-35f407.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-35f407.html" -->
+</tr>
+<tr class="bt_logic_error_assigned_value_is_garbage_or_undefined"><td class="DESC">Logic error</td><td class="DESC">Assigned value is garbage or undefined</td><td>rootdir/src/webserver/src/WebServer.cpp</td><td class="DESC">CDynStatisticImage</td><td class="Q">1421</td><td class="Q">14</td><td><a href="report-4166da.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-4166da.html" -->
+</tr>
+<tr class="bt_logic_error_buffer_overflow"><td class="DESC">Logic error</td><td class="DESC">Buffer overflow</td><td>rootdir/src/Logger.cpp</td><td class="DESC">GetDebugCategory</td><td class="Q">184</td><td class="Q">6</td><td><a href="report-6fd51d.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-6fd51d.html" -->
+</tr>
+<tr class="bt_logic_error_called_c++_object_pointer_is_null"><td class="DESC">Logic error</td><td class="DESC">Called C++ object pointer is null</td><td>rootdir/src/ExternalConnector.cpp</td><td class="DESC">command_completion</td><td class="Q">237</td><td class="Q">4</td><td><a href="report-1675e8.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-1675e8.html" -->
+</tr>
+<tr class="bt_logic_error_called_c++_object_pointer_is_null"><td class="DESC">Logic error</td><td class="DESC">Called C++ object pointer is null</td><td>rootdir/src/extern/wxWidgets/listctrl.cpp</td><td class="DESC">HasFlag</td><td class="Q">498</td><td class="Q">8</td><td><a href="report-62a962.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-62a962.html" -->
+</tr>
+<tr class="bt_logic_error_called_c++_object_pointer_is_null"><td class="DESC">Logic error</td><td class="DESC">Called C++ object pointer is null</td><td>rootdir/src/extern/wxWidgets/listctrl.cpp</td><td class="DESC">ResizeReportView</td><td class="Q">5658</td><td class="Q">19</td><td><a href="report-b7fd44.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-b7fd44.html" -->
+</tr>
+<tr class="bt_logic_error_cast_from_non-struct_type_to_struct_type"><td class="DESC">Logic error</td><td class="DESC">Cast from non-struct type to struct type</td><td>rootdir/src/libs/ec/cpp/ECTag.cpp</td><td class="DESC">GetIPv4Data</td><td class="Q">646</td><td class="Q">1</td><td><a href="report-012109.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-012109.html" -->
+</tr>
+<tr class="bt_logic_error_cast_from_non-struct_type_to_struct_type"><td class="DESC">Logic error</td><td class="DESC">Cast from non-struct type to struct type</td><td>rootdir/src/libs/ec/cpp/ECTag.cpp</td><td class="DESC">GetIPv4Data</td><td class="Q">647</td><td class="Q">1</td><td><a href="report-14a809.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-14a809.html" -->
+</tr>
+<tr class="bt_logic_error_cast_from_non-struct_type_to_struct_type"><td class="DESC">Logic error</td><td class="DESC">Cast from non-struct type to struct type</td><td>rootdir/src/libs/ec/cpp/ECTag.cpp</td><td class="DESC">CECTag</td><td class="Q">113</td><td class="Q">1</td><td><a href="report-57f664.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-57f664.html" -->
+</tr>
+<tr class="bt_logic_error_cast_from_non-struct_type_to_struct_type"><td class="DESC">Logic error</td><td class="DESC">Cast from non-struct type to struct type</td><td>rootdir/src/Packet.cpp</td><td class="DESC">GetPacketSizeFromHeader</td><td class="Q">171</td><td class="Q">1</td><td><a href="report-6d0b9e.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-6d0b9e.html" -->
+</tr>
+<tr class="bt_logic_error_cast_from_non-struct_type_to_struct_type"><td class="DESC">Logic error</td><td class="DESC">Cast from non-struct type to struct type</td><td>rootdir/src/libs/ec/cpp/ECTag.cpp</td><td class="DESC">CECTag</td><td class="Q">114</td><td class="Q">1</td><td><a href="report-76872f.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-76872f.html" -->
+</tr>
+<tr class="bt_logic_error_cast_from_non-struct_type_to_struct_type"><td class="DESC">Logic error</td><td class="DESC">Cast from non-struct type to struct type</td><td>rootdir/src/Packet.cpp</td><td class="DESC">CPacket</td><td class="Q">83</td><td class="Q">1</td><td><a href="report-ab0848.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-ab0848.html" -->
+</tr>
+<tr class="bt_logic_error_cast_from_non-struct_type_to_struct_type"><td class="DESC">Logic error</td><td class="DESC">Cast from non-struct type to struct type</td><td>rootdir/src/Packet.cpp</td><td class="DESC">GetHeader</td><td class="Q">227</td><td class="Q">1</td><td><a href="report-b1b601.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-b1b601.html" -->
+</tr>
+<tr class="bt_logic_error_cast_from_non-struct_type_to_struct_type"><td class="DESC">Logic error</td><td class="DESC">Cast from non-struct type to struct type</td><td>rootdir/src/Packet.cpp</td><td class="DESC">GetUDPHeader</td><td class="Q">239</td><td class="Q">1</td><td><a href="report-d4c5a8.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-d4c5a8.html" -->
+</tr>
+<tr class="bt_logic_error_cast_from_non-struct_type_to_struct_type"><td class="DESC">Logic error</td><td class="DESC">Cast from non-struct type to struct type</td><td>rootdir/src/webserver/src/WebServer.cpp</td><td class="DESC">CreateSpan</td><td class="Q">1042</td><td class="Q">1</td><td><a href="report-f50d72.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-f50d72.html" -->
+</tr>
+<tr class="bt_unused_code_dead_assignment"><td class="DESC">Unused code</td><td class="DESC">Dead assignment</td><td>rootdir/src/webserver/src/php_syntree.cpp</td><td class="DESC">php_expr_eval</td><td class="Q">1315</td><td class="Q">1</td><td><a href="report-b9bde3.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-b9bde3.html" -->
+</tr>
+<tr class="bt_unused_code_dead_nested_assignment"><td class="DESC">Unused code</td><td class="DESC">Dead nested assignment</td><td>rootdir/src/ECSpecialMuleTags.cpp</td><td class="DESC">Apply</td><td class="Q">518</td><td class="Q">1</td><td><a href="report-00e22d.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-00e22d.html" -->
+</tr>
+<tr class="bt_unused_code_dead_nested_assignment"><td class="DESC">Unused code</td><td class="DESC">Dead nested assignment</td><td>rootdir/src/ExternalConn.cpp</td><td class="DESC">Get_EC_Response_Friend</td><td class="Q">986</td><td class="Q">1</td><td><a href="report-5f279a.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-5f279a.html" -->
+</tr>
+<tr class="bt_logic_error_dereference_of_null_pointer"><td class="DESC">Logic error</td><td class="DESC">Dereference of null pointer</td><td>rootdir/src/RLE.cpp</td><td class="DESC">Decode</td><td class="Q">128</td><td class="Q">26</td><td><a href="report-0c06b3.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-0c06b3.html" -->
+</tr>
+<tr class="bt_logic_error_dereference_of_null_pointer"><td class="DESC">Logic error</td><td class="DESC">Dereference of null pointer</td><td>rootdir/src/ED2KLinkParser.cpp</td><td class="DESC">GetLinksFilePath</td><td class="Q">117</td><td class="Q">21</td><td><a href="report-70e799.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-70e799.html" -->
+</tr>
+<tr class="bt_memory_error_double_delete"><td class="DESC">Memory error</td><td class="DESC">Double delete</td><td>usr/include/wx-3.2/wx/string.h</td><td class="DESC">~wxCStrData</td><td class="Q">4388</td><td class="Q">9</td><td><a href="report-1f5392.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-1f5392.html" -->
+</tr>
+<tr class="bt_memory_error_memory_leak"><td class="DESC">Memory error</td><td class="DESC">Memory leak</td><td>rootdir/src/BaseClient.cpp</td><td class="DESC">SendSharedFilesOfDirectory</td><td class="Q">2921</td><td class="Q">8</td><td><a href="report-193fd9.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-193fd9.html" -->
+</tr>
+<tr class="bt_memory_error_memory_leak"><td class="DESC">Memory error</td><td class="DESC">Memory leak</td><td>rootdir/src/webserver/src/php_syntree.cpp</td><td class="DESC">php_add_native_class</td><td class="Q">1053</td><td class="Q">5</td><td><a href="report-1e28d3.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-1e28d3.html" -->
+</tr>
+<tr class="bt_memory_error_memory_leak"><td class="DESC">Memory error</td><td class="DESC">Memory leak</td><td>rootdir/src/webserver/src/php_syntree.cpp</td><td class="DESC">array_is_key_here</td><td class="Q">768</td><td class="Q">8</td><td><a href="report-248cbb.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-248cbb.html" -->
+</tr>
+<tr class="bt_memory_error_memory_leak"><td class="DESC">Memory error</td><td class="DESC">Memory leak</td><td>rootdir/src/BaseClient.cpp</td><td class="DESC">SendSecIdentStatePacket</td><td class="Q">2249</td><td class="Q">18</td><td><a href="report-64283e.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-64283e.html" -->
+</tr>
+<tr class="bt_memory_error_memory_leak"><td class="DESC">Memory error</td><td class="DESC">Memory leak</td><td>rootdir/src/webserver/src/php_syntree.cpp</td><td class="DESC">php_add_native_func</td><td class="Q">1037</td><td class="Q">9</td><td><a href="report-79b316.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-79b316.html" -->
+</tr>
+<tr class="bt_memory_error_memory_leak"><td class="DESC">Memory error</td><td class="DESC">Memory leak</td><td>rootdir/src/BaseClient.cpp</td><td class="DESC">SendSharedDirectories</td><td class="Q">2880</td><td class="Q">8</td><td><a href="report-e32077.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-e32077.html" -->
+</tr>
+<tr class="bt_memory_error_memory_leak"><td class="DESC">Memory error</td><td class="DESC">Memory leak</td><td>rootdir/src/BaseClient.cpp</td><td class="DESC">ConnectionEstablished</td><td class="Q">1715</td><td class="Q">33</td><td><a href="report-e5f1e9.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-e5f1e9.html" -->
+</tr>
+<tr class="bt_memory_error_memory_leak"><td class="DESC">Memory error</td><td class="DESC">Memory leak</td><td>rootdir/src/webserver/src/php_syntree.cpp</td><td class="DESC">func_scope_init</td><td class="Q">426</td><td class="Q">17</td><td><a href="report-f114e1.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-f114e1.html" -->
+</tr>
+<tr class="bt_logic_error_out-of-bound_access"><td class="DESC">Logic error</td><td class="DESC">Out-of-bound access</td><td>usr/include/wx-3.2/wx/buffer.h</td><td class="DESC">wxCharTypeBuffer</td><td class="Q">284</td><td class="Q">7</td><td><a href="report-205504.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-205504.html" -->
+</tr>
+<tr class="bt_logic_error_out-of-bound_access"><td class="DESC">Logic error</td><td class="DESC">Out-of-bound access</td><td>rootdir/src/Logger.cpp</td><td class="DESC">HasString</td><td class="Q">370</td><td class="Q">15</td><td><a href="report-3ebd1e.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-3ebd1e.html" -->
+</tr>
+<tr class="bt_logic_error_out-of-bound_access"><td class="DESC">Logic error</td><td class="DESC">Out-of-bound access</td><td>rootdir/src/RLE.cpp</td><td class="DESC">Decode</td><td class="Q">148</td><td class="Q">30</td><td><a href="report-7959ce.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-7959ce.html" -->
+</tr>
+<tr class="bt_logic_error_out-of-bound_access"><td class="DESC">Logic error</td><td class="DESC">Out-of-bound access</td><td>rootdir/src/utils/cas/functions.c</td><td class="DESC">get_path</td><td class="Q">171</td><td class="Q">12</td><td><a href="report-826bf1.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-826bf1.html" -->
+</tr>
+<tr class="bt_logic_error_out-of-bound_access"><td class="DESC">Logic error</td><td class="DESC">Out-of-bound access</td><td>rootdir/src/RLE.cpp</td><td class="DESC">Decode</td><td class="Q">128</td><td class="Q">19</td><td><a href="report-a7302e.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-a7302e.html" -->
+</tr>
+<tr class="bt_logic_error_out-of-bound_access"><td class="DESC">Logic error</td><td class="DESC">Out-of-bound access</td><td>rootdir/src/webserver/src/WebServer.cpp</td><td class="DESC">CDynStatisticImage</td><td class="Q">1427</td><td class="Q">12</td><td><a href="report-dd8ada.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-dd8ada.html" -->
+</tr>
+<tr class="bt_logic_error_out-of-bound_array_access"><td class="DESC">Logic error</td><td class="DESC">Out-of-bound array access</td><td>rootdir/src/libs/ec/cpp/ECSocket.cpp</td><td class="DESC">Read</td><td class="Q">172</td><td class="Q">19</td><td><a href="report-4d720a.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-4d720a.html" -->
+</tr>
+<tr class="bt_logic_error_out-of-bound_array_access"><td class="DESC">Logic error</td><td class="DESC">Out-of-bound array access</td><td>rootdir/src/EncryptedStreamSocket.cpp</td><td class="DESC">SendNegotiatingData</td><td class="Q">696</td><td class="Q">26</td><td><a href="report-9348a0.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-9348a0.html" -->
+</tr>
+<tr class="bt_logic_error_out-of-bound_array_access"><td class="DESC">Logic error</td><td class="DESC">Out-of-bound array access</td><td>rootdir/src/DownloadClient.cpp</td><td class="DESC">unzip</td><td class="Q">1117</td><td class="Q">43</td><td><a href="report-e95f32.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-e95f32.html" -->
+</tr>
+<tr class="bt_logic_error_out-of-bound_array_access"><td class="DESC">Logic error</td><td class="DESC">Out-of-bound array access</td><td>rootdir/src/RLE.cpp</td><td class="DESC">Realloc</td><td class="Q">96</td><td class="Q">19</td><td><a href="report-eafcf7.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-eafcf7.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/StatTree.cpp</td><td class="DESC">HasVisibleChildren</td><td class="Q">110</td><td class="Q">1</td><td><a href="report-0002b4.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-0002b4.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/PartFile.cpp</td><td class="DESC">LoadPartFile</td><td class="Q">580</td><td class="Q">1</td><td><a href="report-035d46.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-035d46.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/webserver/src/php_core_lib.cpp</td><td class="DESC">php_native_ngettext</td><td class="Q">453</td><td class="Q">1</td><td><a href="report-04a40a.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-04a40a.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/PartFile.cpp</td><td class="DESC">LoadPartFile</td><td class="Q">332</td><td class="Q">1</td><td><a href="report-0631c8.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-0631c8.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/libs/common/Path.cpp</td><td class="DESC">TruncatePath</td><td class="Q">653</td><td class="Q">1</td><td><a href="report-089d0c.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-089d0c.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/PartFile.cpp</td><td class="DESC">LoadPartFile</td><td class="Q">530</td><td class="Q">1</td><td><a href="report-09c69d.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-09c69d.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/libs/common/Path.cpp</td><td class="DESC">TruncatePath</td><td class="Q">654</td><td class="Q">1</td><td><a href="report-0a5552.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-0a5552.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/Preferences.cpp</td><td class="DESC">Save</td><td class="Q">1465</td><td class="Q">1</td><td><a href="report-0c4e3a.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-0c4e3a.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/webserver/src/WebServer.cpp</td><td class="DESC">ProcessImgFileReq</td><td class="Q">382</td><td class="Q">1</td><td><a href="report-0c9971.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-0c9971.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/PartFile.cpp</td><td class="DESC">LoadPartFile</td><td class="Q">522</td><td class="Q">1</td><td><a href="report-0d52b0.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-0d52b0.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/IP2Country.cpp</td><td class="DESC">DownloadFinished</td><td class="Q">139</td><td class="Q">1</td><td><a href="report-0d78e6.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-0d78e6.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/amuleAppCommon.cpp</td><td class="DESC">CamuleAppCommon</td><td class="Q">71</td><td class="Q">1</td><td><a href="report-0f19b8.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-0f19b8.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/webserver/src/php_core_lib.cpp</td><td class="DESC">php_native_substr</td><td class="Q">267</td><td class="Q">1</td><td><a href="report-11adaf.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-11adaf.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/PartFile.cpp</td><td class="DESC">LoadPartFile</td><td class="Q">526</td><td class="Q">1</td><td><a href="report-11e9ee.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-11e9ee.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/webserver/src/WebServer.cpp</td><td class="DESC">ProcessURL</td><td class="Q">1895</td><td class="Q">1</td><td><a href="report-13da31.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-13da31.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/PartFileConvert.cpp</td><td class="DESC">ScanFolderToAdd</td><td class="Q">95</td><td class="Q">1</td><td><a href="report-14935b.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-14935b.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/IP2Country.cpp</td><td class="DESC">DownloadFinished</td><td class="Q">133</td><td class="Q">1</td><td><a href="report-16d518.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-16d518.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/PartFile.cpp</td><td class="DESC">LoadPartFile</td><td class="Q">404</td><td class="Q">1</td><td><a href="report-18d33e.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-18d33e.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/PartFile.cpp</td><td class="DESC">LoadPartFile</td><td class="Q">425</td><td class="Q">1</td><td><a href="report-1aae82.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-1aae82.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/SearchListCtrl.cpp</td><td class="DESC">UpdateResult</td><td class="Q">303</td><td class="Q">1</td><td><a href="report-1dd4f3.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-1dd4f3.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/PartFile.cpp</td><td class="DESC">LoadPartFile</td><td class="Q">346</td><td class="Q">1</td><td><a href="report-1e3772.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-1e3772.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/amule-remote-gui.cpp</td><td class="DESC">HandlePacket</td><td class="Q">590</td><td class="Q">1</td><td><a href="report-1e4a61.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-1e4a61.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/PartFile.cpp</td><td class="DESC">LoadPartFile</td><td class="Q">415</td><td class="Q">1</td><td><a href="report-1f59bc.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-1f59bc.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/SharedFilesCtrl.cpp</td><td class="DESC">OnAddCollection</td><td class="Q">718</td><td class="Q">1</td><td><a href="report-221d89.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-221d89.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/ECSpecialMuleTags.cpp</td><td class="DESC">Create</td><td class="Q">76</td><td class="Q">1</td><td><a href="report-237fea.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-237fea.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/Statistics.cpp</td><td class="DESC">RecordHistory</td><td class="Q">434</td><td class="Q">1</td><td><a href="report-238198.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-238198.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/amule-gui.cpp</td><td class="DESC">OnInit</td><td class="Q">301</td><td class="Q">1</td><td><a href="report-240e5c.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-240e5c.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/PartFile.cpp</td><td class="DESC">LoadPartFile</td><td class="Q">428</td><td class="Q">1</td><td><a href="report-24a324.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-24a324.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/PartFile.cpp</td><td class="DESC">LoadPartFile</td><td class="Q">379</td><td class="Q">1</td><td><a href="report-24e906.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-24e906.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/PartFile.cpp</td><td class="DESC">LoadPartFile</td><td class="Q">471</td><td class="Q">1</td><td><a href="report-272fc9.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-272fc9.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/DownloadQueue.cpp</td><td class="DESC">AddSearchToDownload</td><td class="Q">239</td><td class="Q">1</td><td><a href="report-27c905.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-27c905.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/PartFileConvert.cpp</td><td class="DESC">performConvertToeMule</td><td class="Q">324</td><td class="Q">1</td><td><a href="report-284705.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-284705.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/SearchListCtrl.cpp</td><td class="DESC">OnDrawItem</td><td class="Q">847</td><td class="Q">1</td><td><a href="report-286edf.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-286edf.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/PartFile.cpp</td><td class="DESC">Delete</td><td class="Q">2277</td><td class="Q">1</td><td><a href="report-287093.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-287093.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/DirectoryTreeCtrl.cpp</td><td class="DESC">SetSharedDirectories</td><td class="Q">281</td><td class="Q">1</td><td><a href="report-2b71ed.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-2b71ed.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/PartFileConvert.cpp</td><td class="DESC">performConvertToeMule</td><td class="Q">270</td><td class="Q">1</td><td><a href="report-2c5661.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-2c5661.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/PartFile.cpp</td><td class="DESC">LoadPartFile</td><td class="Q">337</td><td class="Q">1</td><td><a href="report-2dd2e6.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-2dd2e6.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/extern/wxWidgets/listctrl.cpp</td><td class="DESC">OnChar</td><td class="Q">3551</td><td class="Q">1</td><td><a href="report-2e0371.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-2e0371.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/PartFileConvert.cpp</td><td class="DESC">performConvertToeMule</td><td class="Q">396</td><td class="Q">1</td><td><a href="report-2e78f1.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-2e78f1.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/PartFile.cpp</td><td class="DESC">LoadPartFile</td><td class="Q">696</td><td class="Q">1</td><td><a href="report-2edc56.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-2edc56.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/amule-remote-gui.cpp</td><td class="DESC">OnPollTimer</td><td class="Q">176</td><td class="Q">1</td><td><a href="report-372bdf.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-372bdf.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/PartFileConvert.cpp</td><td class="DESC">performConvertToeMule</td><td class="Q">443</td><td class="Q">1</td><td><a href="report-37ef0e.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-37ef0e.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/amuleAppCommon.cpp</td><td class="DESC">CreateED2kLink</td><td class="Q">191</td><td class="Q">1</td><td><a href="report-38c1de.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-38c1de.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/webserver/src/php_core_lib.cpp</td><td class="DESC">php_native_gettext_noop</td><td class="Q">420</td><td class="Q">1</td><td><a href="report-38e3f3.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-38e3f3.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/ClientCreditsList.cpp</td><td class="DESC">CreateSignature</td><td class="Q">345</td><td class="Q">1</td><td><a href="report-39d569.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-39d569.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/extern/wxWidgets/listctrl.cpp</td><td class="DESC">OnChar</td><td class="Q">3496</td><td class="Q">1</td><td><a href="report-3ac078.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-3ac078.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/PartFile.cpp</td><td class="DESC">CPartFile</td><td class="Q">248</td><td class="Q">1</td><td><a href="report-3c2f8c.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-3c2f8c.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/amuleAppCommon.cpp</td><td class="DESC">InitCommon</td><td class="Q">388</td><td class="Q">1</td><td><a href="report-401e59.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-401e59.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/PartFileConvert.cpp</td><td class="DESC">performConvertToeMule</td><td class="Q">306</td><td class="Q">1</td><td><a href="report-41c2ab.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-41c2ab.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/DirectoryTreeCtrl.cpp</td><td class="DESC">Init</td><td class="Q">108</td><td class="Q">1</td><td><a href="report-4294ac.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-4294ac.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/webserver/src/WebServer.cpp</td><td class="DESC">ProcessURL</td><td class="Q">1876</td><td class="Q">1</td><td><a href="report-47c59d.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-47c59d.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/extern/wxWidgets/listctrl.cpp</td><td class="DESC">OnChar</td><td class="Q">3509</td><td class="Q">1</td><td><a href="report-48b1bb.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-48b1bb.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/ThreadTasks.cpp</td><td class="DESC">Entry</td><td class="Q">483</td><td class="Q">1</td><td><a href="report-4b2c6d.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-4b2c6d.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/ServerList.cpp</td><td class="DESC">Init</td><td class="Q">78</td><td class="Q">1</td><td><a href="report-4c5061.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-4c5061.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/Proxy.cpp</td><td class="DESC">process_send_command_request</td><td class="Q">925</td><td class="Q">1</td><td><a href="report-4c8c59.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-4c8c59.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/amuleAppCommon.cpp</td><td class="DESC">CreateED2kLink</td><td class="Q">189</td><td class="Q">1</td><td><a href="report-4cb7bc.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-4cb7bc.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/extern/wxWidgets/listctrl.cpp</td><td class="DESC">OnChar</td><td class="Q">3547</td><td class="Q">1</td><td><a href="report-4ce7ec.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-4ce7ec.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/Statistics.cpp</td><td class="DESC">Load</td><td class="Q">314</td><td class="Q">1</td><td><a href="report-4e9c02.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-4e9c02.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/ClientTCPSocket.cpp</td><td class="DESC">PacketReceived</td><td class="Q">1976</td><td class="Q">1</td><td><a href="report-4efc65.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-4efc65.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/PartFile.cpp</td><td class="DESC">LoadPartFile</td><td class="Q">537</td><td class="Q">1</td><td><a href="report-4fe54e.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-4fe54e.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/Preferences.cpp</td><td class="DESC">TransferFromWindow</td><td class="Q">442</td><td class="Q">1</td><td><a href="report-564028.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-564028.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/CFile.cpp</td><td class="DESC">Reopen</td><td class="Q">282</td><td class="Q">1</td><td><a href="report-5676f5.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-5676f5.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/PartFileConvert.cpp</td><td class="DESC">performConvertToeMule</td><td class="Q">421</td><td class="Q">1</td><td><a href="report-5741ae.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-5741ae.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/SafeFile.cpp</td><td class="DESC">GetIntTagValue</td><td class="Q">580</td><td class="Q">1</td><td><a href="report-5be6cb.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-5be6cb.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/PartFile.cpp</td><td class="DESC">LoadPartFile</td><td class="Q">488</td><td class="Q">1</td><td><a href="report-5c4d69.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-5c4d69.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/PartFile.cpp</td><td class="DESC">Delete</td><td class="Q">2269</td><td class="Q">1</td><td><a href="report-5c5544.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-5c5544.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/PartFile.cpp</td><td class="DESC">LoadPartFile</td><td class="Q">340</td><td class="Q">1</td><td><a href="report-5ec267.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-5ec267.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/amuleAppCommon.cpp</td><td class="DESC">CreateED2kLink</td><td class="Q">162</td><td class="Q">1</td><td><a href="report-62599c.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-62599c.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/amuleAppCommon.cpp</td><td class="DESC">CreateED2kLink</td><td class="Q">172</td><td class="Q">1</td><td><a href="report-66b7ba.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-66b7ba.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/PartFileConvert.cpp</td><td class="DESC">ReaddAllJobs</td><td class="Q">487</td><td class="Q">1</td><td><a href="report-674f35.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-674f35.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/extern/wxWidgets/listctrl.cpp</td><td class="DESC">OnChar</td><td class="Q">3475</td><td class="Q">1</td><td><a href="report-68c67c.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-68c67c.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/PartFile.cpp</td><td class="DESC">GetNeededSpace</td><td class="Q">3236</td><td class="Q">1</td><td><a href="report-6d5a2d.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-6d5a2d.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/webserver/src/WebServer.cpp</td><td class="DESC">ProcessURL</td><td class="Q">1873</td><td class="Q">1</td><td><a href="report-6e2cba.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-6e2cba.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/KnownFile.cpp</td><td class="DESC">ClearPriority</td><td class="Q">1459</td><td class="Q">1</td><td><a href="report-6f4254.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-6f4254.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/extern/wxWidgets/listctrl.cpp</td><td class="DESC">OnKillFocus</td><td class="Q">2240</td><td class="Q">1</td><td><a href="report-6f9c47.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-6f9c47.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/amuleAppCommon.cpp</td><td class="DESC">CreateED2kLink</td><td class="Q">192</td><td class="Q">1</td><td><a href="report-738e6b.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-738e6b.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/SharedFilesCtrl.cpp</td><td class="DESC">OnAddCollection</td><td class="Q">719</td><td class="Q">1</td><td><a href="report-74fb00.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-74fb00.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/PartFile.cpp</td><td class="DESC">LoadPartFile</td><td class="Q">641</td><td class="Q">1</td><td><a href="report-756b56.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-756b56.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/webserver/src/php_core_lib.cpp</td><td class="DESC">php_native_ngettext</td><td class="Q">445</td><td class="Q">1</td><td><a href="report-76781b.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-76781b.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/PartFileConvert.cpp</td><td class="DESC">performConvertToeMule</td><td class="Q">412</td><td class="Q">1</td><td><a href="report-7b1b76.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-7b1b76.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/webserver/src/WebServer.cpp</td><td class="DESC">ProcessURL</td><td class="Q">1884</td><td class="Q">1</td><td><a href="report-7be868.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-7be868.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/webserver/src/php_core_lib.cpp</td><td class="DESC">php_native_gettext</td><td class="Q">403</td><td class="Q">1</td><td><a href="report-7bf3c1.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-7bf3c1.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/webserver/src/php_core_lib.cpp</td><td class="DESC">php_native_substr</td><td class="Q">259</td><td class="Q">1</td><td><a href="report-8151cf.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-8151cf.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/amuleAppCommon.cpp</td><td class="DESC">InitCommon</td><td class="Q">385</td><td class="Q">1</td><td><a href="report-87e025.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-87e025.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/SearchListCtrl.cpp</td><td class="DESC">OnDrawItem</td><td class="Q">919</td><td class="Q">1</td><td><a href="report-88f323.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-88f323.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/PartFile.cpp</td><td class="DESC">LoadPartFile</td><td class="Q">497</td><td class="Q">1</td><td><a href="report-892203.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-892203.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/ThreadTasks.cpp</td><td class="DESC">Entry</td><td class="Q">464</td><td class="Q">1</td><td><a href="report-899f4d.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-899f4d.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/PartFileConvert.cpp</td><td class="DESC">performConvertToeMule</td><td class="Q">393</td><td class="Q">1</td><td><a href="report-8a5395.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-8a5395.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/webserver/src/WebServer.cpp</td><td class="DESC">ProcessURL</td><td class="Q">1862</td><td class="Q">1</td><td><a href="report-8f4478.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-8f4478.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/PartFile.cpp</td><td class="DESC">LoadPartFile</td><td class="Q">545</td><td class="Q">1</td><td><a href="report-8f7f11.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-8f7f11.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/PartFile.cpp</td><td class="DESC">Delete</td><td class="Q">2262</td><td class="Q">1</td><td><a href="report-90bcad.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-90bcad.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/IP2Country.cpp</td><td class="DESC">DownloadFinished</td><td class="Q">145</td><td class="Q">1</td><td><a href="report-90ee22.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-90ee22.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/amuleAppCommon.cpp</td><td class="DESC">CreateED2kLink</td><td class="Q">190</td><td class="Q">1</td><td><a href="report-911c2b.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-911c2b.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/utils/wxCas/src/wxcasframe.cpp</td><td class="DESC">WxCasFrame</td><td class="Q">81</td><td class="Q">1</td><td><a href="report-91dcc8.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-91dcc8.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/PartFile.cpp</td><td class="DESC">LoadPartFile</td><td class="Q">691</td><td class="Q">1</td><td><a href="report-95407e.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-95407e.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/ThreadTasks.cpp</td><td class="DESC">Entry</td><td class="Q">586</td><td class="Q">1</td><td><a href="report-9665e6.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-9665e6.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/ThreadTasks.cpp</td><td class="DESC">Entry</td><td class="Q">457</td><td class="Q">1</td><td><a href="report-971e3c.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-971e3c.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/libs/common/Path.cpp</td><td class="DESC">TruncatePath</td><td class="Q">661</td><td class="Q">1</td><td><a href="report-97a60e.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-97a60e.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/amuleAppCommon.cpp</td><td class="DESC">InitCommon</td><td class="Q">403</td><td class="Q">1</td><td><a href="report-97fca8.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-97fca8.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/extern/wxWidgets/listctrl.cpp</td><td class="DESC">OnArrowChar</td><td class="Q">3388</td><td class="Q">1</td><td><a href="report-985800.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-985800.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/amuleAppCommon.cpp</td><td class="DESC">InitCommon</td><td class="Q">441</td><td class="Q">1</td><td><a href="report-9aea57.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-9aea57.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/DownloadListCtrl.cpp</td><td class="DESC">OnDrawItem</td><td class="Q">876</td><td class="Q">1</td><td><a href="report-9b055a.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-9b055a.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/kademlia/kademlia/SearchManager.cpp</td><td class="DESC">PrepareLookup</td><td class="Q">179</td><td class="Q">1</td><td><a href="report-a0c9c1.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-a0c9c1.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/PartFile.cpp</td><td class="DESC">LoadPartFile</td><td class="Q">411</td><td class="Q">1</td><td><a href="report-a246ca.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-a246ca.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/amule-remote-gui.cpp</td><td class="DESC">OnInit</td><td class="Q">265</td><td class="Q">1</td><td><a href="report-a3cfd7.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-a3cfd7.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/extern/wxWidgets/listctrl.cpp</td><td class="DESC">Create</td><td class="Q">5053</td><td class="Q">1</td><td><a href="report-a43d5d.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-a43d5d.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/PartFile.cpp</td><td class="DESC">CompleteFileEnded</td><td class="Q">2143</td><td class="Q">1</td><td><a href="report-a4cb0b.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-a4cb0b.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/PartFileConvert.cpp</td><td class="DESC">performConvertToeMule</td><td class="Q">374</td><td class="Q">1</td><td><a href="report-a580cd.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-a580cd.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/webserver/src/WebServer.cpp</td><td class="DESC">ProcessImgFileReq</td><td class="Q">376</td><td class="Q">1</td><td><a href="report-a79329.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-a79329.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/Proxy.cpp</td><td class="DESC">RecvFrom</td><td class="Q">1396</td><td class="Q">1</td><td><a href="report-af3da0.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-af3da0.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/PartFileConvert.cpp</td><td class="DESC">performConvertToeMule</td><td class="Q">250</td><td class="Q">1</td><td><a href="report-b2a4fd.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-b2a4fd.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/PartFile.cpp</td><td class="DESC">LoadPartFile</td><td class="Q">419</td><td class="Q">1</td><td><a href="report-b3bfdd.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-b3bfdd.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/webserver/src/WebServer.cpp</td><td class="DESC">ProcessURL</td><td class="Q">1958</td><td class="Q">1</td><td><a href="report-b4550f.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-b4550f.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/extern/wxWidgets/listctrl.cpp</td><td class="DESC">OnChar</td><td class="Q">3523</td><td class="Q">1</td><td><a href="report-b62134.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-b62134.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/ThreadTasks.cpp</td><td class="DESC">CHashingTask</td><td class="Q">63</td><td class="Q">1</td><td><a href="report-b8200f.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-b8200f.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/PartFile.cpp</td><td class="DESC">LoadPartFile</td><td class="Q">397</td><td class="Q">1</td><td><a href="report-b8a637.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-b8a637.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/webserver/src/php_core_lib.cpp</td><td class="DESC">php_native_ngettext</td><td class="Q">437</td><td class="Q">1</td><td><a href="report-bd3673.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-bd3673.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/amuleAppCommon.cpp</td><td class="DESC">CamuleAppCommon</td><td class="Q">69</td><td class="Q">1</td><td><a href="report-c4e3ee.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-c4e3ee.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/extern/wxWidgets/listctrl.cpp</td><td class="DESC">OnChar</td><td class="Q">3480</td><td class="Q">1</td><td><a href="report-c6db45.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-c6db45.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/PartFile.cpp</td><td class="DESC">LoadPartFile</td><td class="Q">703</td><td class="Q">1</td><td><a href="report-c8085a.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-c8085a.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/amule-remote-gui.cpp</td><td class="DESC">OnPollTimer</td><td class="Q">178</td><td class="Q">1</td><td><a href="report-c85a47.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-c85a47.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/ThreadTasks.cpp</td><td class="DESC">Entry</td><td class="Q">591</td><td class="Q">1</td><td><a href="report-c88619.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-c88619.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/PartFile.cpp</td><td class="DESC">LoadPartFile</td><td class="Q">364</td><td class="Q">1</td><td><a href="report-cb5b97.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-cb5b97.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/Proxy.cpp</td><td class="DESC">process_send_command_request</td><td class="Q">1138</td><td class="Q">1</td><td><a href="report-cbcd22.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-cbcd22.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/PartFile.cpp</td><td class="DESC">LoadPartFile</td><td class="Q">634</td><td class="Q">1</td><td><a href="report-ccd9b6.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-ccd9b6.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/kademlia/kademlia/Kademlia.cpp</td><td class="DESC">ProcessPacket</td><td class="Q">301</td><td class="Q">1</td><td><a href="report-cdcb4d.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-cdcb4d.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/extern/wxWidgets/listctrl.cpp</td><td class="DESC">OnChar</td><td class="Q">3461</td><td class="Q">1</td><td><a href="report-cf951f.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-cf951f.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/extern/wxWidgets/listctrl.cpp</td><td class="DESC">OnChar</td><td class="Q">3485</td><td class="Q">1</td><td><a href="report-d126ed.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-d126ed.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/PartFile.cpp</td><td class="DESC">LoadPartFile</td><td class="Q">453</td><td class="Q">1</td><td><a href="report-d2f191.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-d2f191.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/amuleDlg.cpp</td><td class="DESC">OnToolBarButton</td><td class="Q">454</td><td class="Q">1</td><td><a href="report-d4e663.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-d4e663.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/libs/common/MuleDebug.cpp</td><td class="DESC">OnUnhandledException</td><td class="Q">93</td><td class="Q">1</td><td><a href="report-d56629.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-d56629.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/DownloadQueue.cpp</td><td class="DESC">AddSearchToDownload</td><td class="Q">262</td><td class="Q">1</td><td><a href="report-d642ab.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-d642ab.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/UPnPBase.cpp</td><td class="DESC">~CUPnPControlPoint</td><td class="Q">895</td><td class="Q">1</td><td><a href="report-d6ab8c.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-d6ab8c.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/PartFileConvert.cpp</td><td class="DESC">performConvertToeMule</td><td class="Q">279</td><td class="Q">1</td><td><a href="report-d7c72d.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-d7c72d.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/webserver/src/WebServer.cpp</td><td class="DESC">ReQuery</td><td class="Q">640</td><td class="Q">1</td><td><a href="report-d95008.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-d95008.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/PartFile.cpp</td><td class="DESC">LoadPartFile</td><td class="Q">628</td><td class="Q">1</td><td><a href="report-dad38e.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-dad38e.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/utils/aLinkCreator/src/alcframe.cpp</td><td class="DESC">OnStartButton</td><td class="Q">539</td><td class="Q">1</td><td><a href="report-ddfee2.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-ddfee2.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/webserver/src/WebServer.cpp</td><td class="DESC">ProcessURL</td><td class="Q">1869</td><td class="Q">1</td><td><a href="report-de2144.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-de2144.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/amuleAppCommon.cpp</td><td class="DESC">CheckPassedLink</td><td class="Q">490</td><td class="Q">1</td><td><a href="report-e513ec.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-e513ec.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/SearchListCtrl.cpp</td><td class="DESC">OnDrawItem</td><td class="Q">909</td><td class="Q">1</td><td><a href="report-e57906.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-e57906.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/DownloadQueue.cpp</td><td class="DESC">AddSearchToDownload</td><td class="Q">253</td><td class="Q">1</td><td><a href="report-e5a30b.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-e5a30b.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/amuleAppCommon.cpp</td><td class="DESC">InitCommon</td><td class="Q">364</td><td class="Q">1</td><td><a href="report-e8387f.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-e8387f.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/PartFile.cpp</td><td class="DESC">LoadPartFile</td><td class="Q">727</td><td class="Q">1</td><td><a href="report-ed005d.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-ed005d.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/PartFile.cpp</td><td class="DESC">LoadPartFile</td><td class="Q">479</td><td class="Q">1</td><td><a href="report-ee51e4.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-ee51e4.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/ClientTCPSocket.cpp</td><td class="DESC">PacketReceived</td><td class="Q">2023</td><td class="Q">1</td><td><a href="report-efbee9.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-efbee9.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/amuleAppCommon.cpp</td><td class="DESC">InitCommon</td><td class="Q">365</td><td class="Q">1</td><td><a href="report-f1a772.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-f1a772.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/ECSpecialMuleTags.cpp</td><td class="DESC">Apply</td><td class="Q">66</td><td class="Q">1</td><td><a href="report-f4e684.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-f4e684.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/amuleAppCommon.cpp</td><td class="DESC">CamuleAppCommon</td><td class="Q">65</td><td class="Q">1</td><td><a href="report-f54549.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-f54549.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/SearchListCtrl.cpp</td><td class="DESC">OnDrawItem</td><td class="Q">933</td><td class="Q">1</td><td><a href="report-f573ff.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-f573ff.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/PartFileConvert.cpp</td><td class="DESC">performConvertToeMule</td><td class="Q">289</td><td class="Q">1</td><td><a href="report-f67875.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-f67875.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/extern/wxWidgets/listctrl.cpp</td><td class="DESC">OnArrowChar</td><td class="Q">3369</td><td class="Q">1</td><td><a href="report-f8f2b4.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-f8f2b4.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/ThreadTasks.cpp</td><td class="DESC">Entry</td><td class="Q">471</td><td class="Q">1</td><td><a href="report-fcb366.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-fcb366.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/amuleAppCommon.cpp</td><td class="DESC">CamuleAppCommon</td><td class="Q">61</td><td class="Q">1</td><td><a href="report-fd896e.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-fd896e.html" -->
+</tr>
+<tr class="bt_unused_code_unreachable_code"><td class="DESC">Unused code</td><td class="DESC">Unreachable code</td><td>rootdir/src/PartFileConvert.cpp</td><td class="DESC">performConvertToeMule</td><td class="Q">401</td><td class="Q">1</td><td><a href="report-ff9498.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-ff9498.html" -->
+</tr>
+<tr class="bt_logic_error_use_fixed_address"><td class="DESC">Logic error</td><td class="DESC">Use fixed address</td><td>rootdir/src/ExternalConn.cpp</td><td class="DESC">ECStatusMsgSource</td><td class="Q">1865</td><td class="Q">17</td><td><a href="report-02a26c.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-02a26c.html" -->
+</tr>
+<tr class="bt_memory_error_use-after-free"><td class="DESC">Memory error</td><td class="DESC">Use-after-free</td><td>usr/include/wx-3.2/wx/buffer.h</td><td class="DESC">DecRef</td><td class="Q">206</td><td class="Q">23</td><td><a href="report-a4073f.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-a4073f.html" -->
+</tr>
+<tr class="bt_memory_error_use-after-free"><td class="DESC">Memory error</td><td class="DESC">Use-after-free</td><td>usr/include/wx-3.2/wx/buffer.h</td><td class="DESC">data</td><td class="Q">164</td><td class="Q">16</td><td><a href="report-a938c1.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-a938c1.html" -->
+</tr>
+<tr class="bt_memory_error_use-after-free"><td class="DESC">Memory error</td><td class="DESC">Use-after-free</td><td>usr/include/wx-3.2/wx/buffer.h</td><td class="DESC">data</td><td class="Q">166</td><td class="Q">20</td><td><a href="report-abe6b7.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-abe6b7.html" -->
+</tr>
+<tr class="bt_unix_api_malloc_size_overflow"><td class="DESC">Unix API</td><td class="DESC">malloc() size overflow</td><td>usr/include/wx-3.2/wx/buffer.h</td><td class="DESC">wxCharTypeBuffer</td><td class="Q">281</td><td class="Q">1</td><td><a href="report-135aff.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-135aff.html" -->
+</tr>
+<tr class="bt_unix_api_malloc_size_overflow"><td class="DESC">Unix API</td><td class="DESC">malloc() size overflow</td><td>usr/include/wx-3.2/wx/buffer.h</td><td class="DESC">StrCopy</td><td class="Q">241</td><td class="Q">1</td><td><a href="report-f036ad.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-f036ad.html" -->
+</tr>
+</tbody>
+</table>
+
+</body></html>
