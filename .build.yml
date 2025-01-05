@@ -15,6 +15,7 @@ requires:
   - autopoint
   - autotools-dev
   - expect
+  - gettext
   - binutils
   - binutils-dev
   - libboost-dev
