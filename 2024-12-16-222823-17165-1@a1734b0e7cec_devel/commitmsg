@@ -1,0 +1,1 @@
+Fix build with Boost 1.87 that removes deprecated asio methods
