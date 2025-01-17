@@ -19,8 +19,8 @@ requires:
   - gettext
   - binutils
   - binutils-dev
-  - libboost-dev
-  - libboost-system-dev
+#  - libboost-dev
+#  - libboost-system-dev
   - libcrypto++-dev
   - libgd-dev
   - libgeoip-dev
@@ -37,6 +37,10 @@ before_scripts:
   - ./html-cppcheck
 
 build_scripts:
+  - wget https://archives.boost.io/release/1.87.0/source/boost_1_87_0.tar.bz2
+  - tar --bzip2 -xf *bz2
+  - cd boost_1_87_0
+  - ./bootstrap.sh
   - ./before-build
   - export CFLAGS+=" -Wno-register"
   - export CXXFLAGS+=" -Wno-register"
