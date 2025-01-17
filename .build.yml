@@ -43,6 +43,7 @@ build_scripts:
   - cd boost_1_87_0
   - ./bootstrap.sh
   - cd ..
+  - rm -R boost_1_87_0
   - ./before-build
   - export CFLAGS+=" -Wno-register"
   - export CXXFLAGS+=" -Wno-register"
