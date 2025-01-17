@@ -42,6 +42,7 @@ build_scripts:
   - tar --bzip2 -xf *bz2
   - cd boost_1_87_0
   - ./bootstrap.sh
+  - cd ..
   - ./before-build
   - export CFLAGS+=" -Wno-register"
   - export CXXFLAGS+=" -Wno-register"
