@@ -42,6 +42,7 @@ build_scripts:
   - tar --bzip2 -xf *bz2
   - cd boost_1_87_0
   - ./bootstrap.sh --prefix=/usr
+  - ./b2 install
   - cd ..
   - rm -R boost_1_87_0
   - ./before-build
