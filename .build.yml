@@ -32,6 +32,7 @@ requires:
   - qtchooser
   - wx3.2-i18n
   - zlib1g-dev
+  - wget
 
 before_scripts:
   - ./html-cppcheck
